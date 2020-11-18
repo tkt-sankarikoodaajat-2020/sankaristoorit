@@ -19,21 +19,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: goto frontend
-      run: cd sankaristoorit-ui
     - name: npm ci
       run: npm ci
+      working-directory: sankaristoorit-ui
     - name: test frontend jest tests
       run: npm run test
+      working-directory: sankaristoorit-ui
     - name: build frontend 
       run: npm run build
-    - name: goto root
-      run: cd ..
+      working-directory: sankaristoorit-ui
     - name: copy build to backend
       run: mv ./sankaristoorit-ui/build ./sankaristoorit-backend/build
-    - name: goto backend
-      run: cd sankaristoorit-backend
     - name: npm ci
       run: npm ci
-    - name: test backend
-      run: npm test
+      working-directory: sankaristoorit-backend
