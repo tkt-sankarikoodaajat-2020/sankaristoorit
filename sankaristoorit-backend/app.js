@@ -14,10 +14,15 @@ mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: 
     console.log('error connecting to MongoDB: ', error.message)
   })
 
+app.use(express.static('build'))
 app.use(express.json())
 
 app.use(cors())
 
 app.use('/tips', tipsRouter)
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/build/index.html'));
+});
 
 module.exports = app
