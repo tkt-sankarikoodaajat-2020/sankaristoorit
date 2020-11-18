@@ -38,5 +38,6 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "sankaristoorit"
         heroku_email: "johannes.lares@helsinki.fi"
+        appdir: "sankaristoorit-backend"
       env:
         MONGODB_URI: ${{secrets.MONGODB_URI}}
