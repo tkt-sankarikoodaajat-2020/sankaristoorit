@@ -25,9 +25,6 @@ jobs:
     - name: test frontend jest tests
       run: npm run test
       working-directory: sankaristoorit-ui
-    - name: build frontend 
-      run: npm run build
-      working-directory: sankaristoorit-ui
     - name: npm ci backend
       run: npm ci
       working-directory: sankaristoorit-backend
