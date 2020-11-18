@@ -1,0 +1,39 @@
+name: Sankaristoorit CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: goto frontend
+      run: cd sankaristoorit-ui
+    - name: npm ci
+      run: npm ci
+    - name: test frontend jest tests
+      run: npm run test
+    - name: build frontend 
+      run: npm run build
+    - name: goto root
+      run: cd ..
+    - name: copy build to backend
+      run: mv ./sankaristoorit-ui/build ./sankaristoorit-backend/build
+    - name: goto backend
+      run: cd sankaristoorit-backend
+    - name: npm ci
+      run: npm ci
+    - name: test backend
+      run: npm test
