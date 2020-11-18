@@ -6,7 +6,7 @@ Kansiossa `./sankaristoorit-backend` komento npm install. Tämä asentaa kaikki 
 
 ## Komennot
 
-Suoritetaan siis komentoriviltä kansiossa `./sankaristoorit-backend` 
+Suoritetaan siis komentoriviltä kansiossa `./sankaristoorit-backend`
 
 ### npm run start
 
@@ -19,3 +19,15 @@ Ajaa backendin testit ja kantana testi
 ### npm run dev
 
 Käytetään dev kantaa, seurataan tiedostojen muuttumista. Hyvä devaamiseen.
+
+## APIDocien teko
+
+#### Asenna apidoc
+
+`npm install apidoc -g`
+
+#### Generoi apidoc
+
+`apidoc -e node_modules`
+
+Tämän jälkeen docit löytyvät hakemistosta `./doc/`
