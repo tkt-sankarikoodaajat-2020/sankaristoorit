@@ -36,11 +36,10 @@ jobs:
       working-directory: sankaristoorit-backend
       env:
         MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
-    - name: login to heroku
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku login
-    - name: add origin to heroku
-      run: git remote add heroku https://git.heroku.com/sankaristoorit.git
-    - name: Deploy to heroku
-      run: git subtree push --prefix sankaristoorit-backend/ heroku master
+    - uses: akhileshns/heroku-deploy@v3.6.8
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "sankaristoorit"
+        heroku_email: "johannes.lares@helsinki.fi"
+      env:
+        MONGODB_URI: ${{secrets.MONGODB_URI}}
