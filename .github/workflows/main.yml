@@ -28,8 +28,6 @@ jobs:
     - name: build frontend 
       run: npm run build
       working-directory: sankaristoorit-ui
-    - name: copy build to backend
-      run: mv ./sankaristoorit-ui/build ./sankaristoorit-backend/build
     - name: npm ci backend
       run: npm ci
       working-directory: sankaristoorit-backend
@@ -38,11 +36,7 @@ jobs:
       working-directory: sankaristoorit-backend
       env:
         MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
-    - uses: akhileshns/heroku-deploy@v3.6.8 
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "sankaristoorit"
-        heroku_email: "johannes.lares@helsinki.fi"
-        appdir: "sankaristoorit-backend"
-      env:
-        MONGODB_URI: ${{secrets.MONGODB_URI}}
+    - name: add origin to heroku
+      run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/sankaristoorit.git
+    - name: Deploy to heroku
+      run: git subtree push --prefix sankaristoorit-backend/ heroku master
