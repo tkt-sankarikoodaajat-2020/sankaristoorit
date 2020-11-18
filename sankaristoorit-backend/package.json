@@ -1,0 +1,28 @@
+{
+  "name": "sankaristoorit-backend",
+  "version": "1.0.0",
+  "description": "Sankaristoorit lukuvinkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js"
+  },
+  "author": "TKT sankarikoodaajat 2020",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.15"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
