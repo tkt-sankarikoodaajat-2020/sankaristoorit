@@ -1,8 +1,9 @@
 import React from 'react';
+import { API_URL } from '../config'
 
 const Example = () => {
   return (
-    <h1>Hello world!</h1>
+    <h1>Hello world! apiurl: {API_URL}</h1>
   )
 }
 
