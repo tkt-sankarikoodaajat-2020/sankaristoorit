@@ -52,6 +52,8 @@ describe('POST TIPS TESTS', () => {
       title: 'Sankaristoori',
     }
 
+    console.log(newTip)
+
     await api
         .post('/tips')
         .send(newTip)
@@ -60,12 +62,12 @@ describe('POST TIPS TESTS', () => {
     
       const response = await api.get('/tips')
       const contents = response.body.map(r => r.title)
-    
+ 
       expect(response.body).toHaveLength(initialTips.length + 1) 
       expect(contents).toContain(
           'Sankaristoori'
       ) 
-})
+  })
 
 })
 

@@ -1,5 +1,4 @@
 const tipsRouter = require('express').Router()
-const Tip = require('../models/Tip')
 const Tips = require('../models/Tip')
 
 /**
@@ -21,11 +20,27 @@ tipsRouter.get('/', (req, res) => {
   })
 })
 
-
+/**
+ * @api {post} /tips Post a HeroStory with title
+ * @apiVersion 0.0.0
+ * @apiName Tips
+ * @apiGroup Tips
+ * 
+ * 
+ * @apiHeader          Accept application/json
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *      [ 
+ *        { 
+ *          title: 'HeroStory',
+ *          id: '5fb5642081f7ceda89ee2020'
+ *        }
+ *      ]
+ */
 tipsRouter.post('/', (req, res, next) => {
   const body = req.body
 
-  const tip = new Tip({
+  const tip = new Tips({
     title: body.title,
   })
 
