@@ -9,18 +9,18 @@ test('TipForm posts correct data.', () => {
     const component = render(
         <TipForm addTip={createTip} />
     )
-
+    
     const input = component.container.querySelector('#title')
     const form = component.container.querySelector('#create-button')
 
     fireEvent.change(input, {
         target: { value: 'Heroes' }
     })
-
+    component.debug()
     fireEvent.submit(form)
 
     expect(createTip.mock.calls.length).toBe(1)
-    // expect(createTip.mock.instances[0][0].title).toBe('Heroes')
+    //expect(createTip.mock.calls[0][0].title).toBe('Heroes')
     
 })
 

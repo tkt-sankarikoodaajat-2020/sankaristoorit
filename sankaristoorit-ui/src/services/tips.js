@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/tips'
+import { API_URL } from '../config'
+
+const baseUrl = API_URL + '/tips'
 
 const getAll = () => {
     const req = axios.get(baseUrl)
