@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Tip = ({tip}) => {
+const Tip = ({ tip }) => {
 
     return (
         <li className='tip'>
