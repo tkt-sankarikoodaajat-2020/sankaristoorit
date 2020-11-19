@@ -1,4 +1,5 @@
 const tipsRouter = require('express').Router()
+const Tip = require('../models/Tip')
 const Tips = require('../models/Tip')
 
 /**
@@ -20,6 +21,22 @@ tipsRouter.get('/', (req, res) => {
   })
 })
 
+
+tipsRouter.post('/', (req, res, next) => {
+  const body = req.body
+
+  const tip = new Tip({
+    title: body.title,
+  })
+
+  tip
+  .save()
+  .then(savedTip => savedTip.toJSON())
+  .then(savedAndFormattedTip => {
+    res.json(savedAndFormattedTip)
+  }) 
+  .catch(error => next(error)) 
+})
 /**
  * @api {delete} /tips/:id Delete Tip with id
  * @apiName Tips

@@ -21,25 +21,52 @@ beforeEach(async () => {
   await tipObject.save()
 })
 
-test('return status 200', async () => {
-  await api
-    .get('/tips')
-    .expect(200)
+describe('GET TIPS TESTS', () => {
+  test('return status 200', async () => {
+    await api
+      .get('/tips')
+      .expect(200)
+  })
+
+  test('initial tips returned', async () => {
+    const response = await api.get('/tips')
+    expect(response.body[0].title).toBe('First test title')
+    expect(response.body[1].title).toBe('Second test title')
+  })
+})
+describe('DELETE TIPS TESTS', () => {
+  test('delete the second tip', async() => {
+    const response = await api.get('/tips')
+    const id = response.body[1].id
+    await api.delete('/tips/' + id)
+    const responseAfterDelete = await api.get('/tips')
+    console.log(responseAfterDelete.body)
+    expect(responseAfterDelete.body.length).toBe(1)
+  })
 })
 
-test('initial tips returned', async () => {
-  const response = await api.get('/tips')
-  expect(response.body[0].title).toBe('First test title')
-  expect(response.body[1].title).toBe('Second test title')
+
+describe('POST TIPS TESTS', () => {
+  test('a valid tip can be added', async () => {
+    const newTip = {
+      title: 'Sankaristoori',
+    }
+
+    await api
+        .post('/tips')
+        .send(newTip)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+    
+      const response = await api.get('/tips')
+      const contents = response.body.map(r => r.title)
+    
+      expect(response.body).toHaveLength(initialTips.length + 1) 
+      expect(contents).toContain(
+          'Sankaristoori'
+      ) 
 })
 
-test('delete the second tip', async() => {
-  const response = await api.get('/tips')
-  const id = response.body[1].id
-  await api.delete('/tips/' + id)
-  const responseAfterDelete = await api.get('/tips')
-  console.log(responseAfterDelete.body)
-  expect(responseAfterDelete.body.length).toBe(1)
 })
 
 afterAll(() => {
