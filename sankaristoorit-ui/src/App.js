@@ -25,7 +25,7 @@ const App = () => {
     const tipObject = {
       title: newTitle,
     }
-
+    
     tipService
     .create(tipObject)
     .then(res => {
