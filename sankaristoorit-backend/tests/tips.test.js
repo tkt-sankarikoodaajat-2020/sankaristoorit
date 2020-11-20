@@ -35,7 +35,7 @@ describe('GET TIPS TESTS', () => {
   })
 })
 describe('DELETE TIPS TESTS', () => {
-  test('delete the second tip', async() => {
+  test('delete the second tip', async () => {
     const response = await api.get('/tips')
     const id = response.body[1].id
     await api.delete('/tips/' + id)
@@ -53,28 +53,28 @@ describe('POST TIPS TESTS', () => {
     }
 
     await api
-        .post('/tips')
-        .send(newTip)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-    
-      const response = await api.get('/tips')
-      const contents = response.body.map(r => r.title)
- 
-      expect(response.body).toHaveLength(initialTips.length + 1) 
-      expect(contents).toContain(
-          'Sankaristoori'
-      ) 
+      .post('/tips')
+      .send(newTip)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/tips')
+    const contents = response.body.map(r => r.title)
+
+    expect(response.body).toHaveLength(initialTips.length + 1)
+    expect(contents).toContain(
+      'Sankaristoori'
+    )
   })
 
   test('post fails without a title', async () => {
-    const newTip = { 
+    const newTip = {
     }
 
     await api
-        .post('/tips')
-        .send(newTip)
-        .expect(400)     
+      .post('/tips')
+      .send(newTip)
+      .expect(400)
   })
 })
 

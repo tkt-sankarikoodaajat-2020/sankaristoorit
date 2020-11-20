@@ -7,8 +7,8 @@ const Tips = require('../models/Tip')
  * @apiGroup Tips
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
- *      [ 
- *        { 
+ *      [
+ *        {
  *          title: 'First test title',
  *          id: '5fb5644081f7ceda89ee1451'
  *        }
@@ -25,13 +25,13 @@ tipsRouter.get('/', (req, res) => {
  * @apiVersion 0.0.0
  * @apiName Tips
  * @apiGroup Tips
- * 
- * 
+ *
+ *
  * @apiHeader          Accept application/json
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
- *      [ 
- *        { 
+ *      [
+ *        {
  *          title: 'HeroStory',
  *          id: '5fb5642081f7ceda89ee2020'
  *        }
@@ -39,10 +39,10 @@ tipsRouter.get('/', (req, res) => {
  */
 tipsRouter.post('/', (req, res, next) => {
   const body = req.body
-  
+
   if (!body.title) {
     return res.status(400).json({
-      error:'title missing'
+      error: 'title missing'
     })
   }
 
@@ -51,12 +51,12 @@ tipsRouter.post('/', (req, res, next) => {
   })
 
   tip
-  .save()
-  .then(savedTip => savedTip.toJSON())
-  .then(savedAndFormattedTip => {
-    res.json(savedAndFormattedTip)
-  }) 
-  .catch(error => next(error)) 
+    .save()
+    .then(savedTip => savedTip.toJSON())
+    .then(savedAndFormattedTip => {
+      res.json(savedAndFormattedTip)
+    })
+    .catch(error => next(error))
 })
 /**
  * @api {delete} /tips/:id Delete Tip with id
@@ -67,7 +67,7 @@ tipsRouter.post('/', (req, res, next) => {
  */
 tipsRouter.delete('/:id', (req, res, next) => {
   Tips.findByIdAndRemove(req.params.id)
-    .then(result => {
+    .then(() => {
       res.status(204).end()
     })
     .catch(error => next(error))
