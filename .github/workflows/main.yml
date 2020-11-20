@@ -40,7 +40,7 @@ jobs:
     - name: Cypress-run
       uses: cypress-io/github-action@v2
       with:
-        start: npm start:test --prefix ../sankaristoorit-backend/
+        start: npm run start:test --prefix ../sankaristoorit-backend/
         working-directory: sankaristoorit-ui
         wait-on: 'http://localhost:3001'
         browser: chrome
