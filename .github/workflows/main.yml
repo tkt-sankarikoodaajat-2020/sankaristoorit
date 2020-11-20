@@ -22,6 +22,9 @@ jobs:
     - name: npm ci frontend
       run: npm ci
       working-directory: sankaristoorit-ui
+    - name: lint frontend
+      run: npm run lint
+      working-directory: sankaristoorit-ui
     - name: test frontend jest tests
       run: npm run test
       working-directory: sankaristoorit-ui
