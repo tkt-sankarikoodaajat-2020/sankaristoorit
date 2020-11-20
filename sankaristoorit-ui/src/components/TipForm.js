@@ -9,12 +9,12 @@ const TipForm = (props) =>
         <Field>
             <Label>Title:</Label>
             <Control>
-                <Input value={props.newTitle}
+                <Input id="title" value={props.newTitle}
             onChange={props.handleTitleChange} />
             </Control>
         </Field>        
         <Control>
-            <Button type="submit" color="primary">create</Button>
+            <Button id="create-button" type="submit" color="primary">create</Button>
         </Control>
     </form>
     </Section>
