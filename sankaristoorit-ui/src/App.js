@@ -3,7 +3,7 @@ import TipList from './components/TipList'
 import tipService from './services/tips'
 import TipForm from './components/TipForm'
 
-import { Hero, Heading, Section, Container } from 'react-bulma-components';
+import { Hero, Heading, Section, Container } from 'react-bulma-components'
 
 const App = () => {
 
@@ -27,16 +27,16 @@ const App = () => {
     const tipObject = {
       title: newTitle,
     }
-    
+
     tipService
-    .create(tipObject)
-    .then(res => {
-      setTips(tips.concat(res))
-      setNewTitle('')
-    })
+      .create(tipObject)
+      .then(res => {
+        setTips(tips.concat(res))
+        setNewTitle('')
+      })
   }
 
- 
+
   return (
     <Container>
       <Section>
@@ -54,18 +54,18 @@ const App = () => {
         </Hero>
       </Section>
       <Section>
-      <Heading subtitle size={3}>
+        <Heading subtitle size={3}>
       Create a new tip
-      </Heading>
-      <TipForm addTip={addTip} newTitle={newTitle}
-      handleTitleChange={handleTitleChange} />
-      <Heading subtitle size={3}>
+        </Heading>
+        <TipForm addTip={addTip} newTitle={newTitle}
+          handleTitleChange={handleTitleChange} />
+        <Heading subtitle size={3}>
           Tips
-      </Heading>
-      <TipList tips={tips} />
+        </Heading>
+        <TipList tips={tips} />
       </Section>
     </Container>
   )
 }
 
-export default App;
+export default App

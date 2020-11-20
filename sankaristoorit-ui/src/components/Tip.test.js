@@ -4,16 +4,16 @@ import { render } from '@testing-library/react'
 import Tip from './Tip'
 
 const tip = {
-    id: 1,
-    title: 'Header'
+  id: 1,
+  title: 'Header'
 }
 
 test('renders content', () => {
-    const component = render(
-        <Tip tip={tip} />
-    )
+  const component = render(
+    <Tip tip={tip} />
+  )
 
-    expect(component.container).toHaveTextContent(
-        'Header'
-    )
+  expect(component.container).toHaveTextContent(
+    'Header'
+  )
 })
