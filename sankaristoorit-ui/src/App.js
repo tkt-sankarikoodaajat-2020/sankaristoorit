@@ -3,6 +3,8 @@ import TipList from './components/TipList'
 import tipService from './services/tips'
 import TipForm from './components/TipForm'
 
+import { Hero, Heading, Section, Container } from 'react-bulma-components';
+
 const App = () => {
 
   const [tips, setTips] = useState([])
@@ -36,13 +38,33 @@ const App = () => {
 
  
   return (
-    <div> 
-      <h2>Create a new tip</h2>
+    <Container>
+      <Section>
+        <Hero color="primary" >
+          <Hero.Body>
+            <Container>
+              <Heading>
+              Sankaristoorit
+              </Heading>
+              <Heading subtitle size={3}>
+              Ohjelmistotuotanto, syksy 2020
+              </Heading>
+            </Container>
+          </Hero.Body>
+        </Hero>
+      </Section>
+      <Section>
+      <Heading subtitle size={3}>
+      Create a new tip
+      </Heading>
       <TipForm addTip={addTip} newTitle={newTitle}
       handleTitleChange={handleTitleChange} />
-      <h1>Tips</h1>
+      <Heading subtitle size={3}>
+          Tips
+      </Heading>
       <TipList tips={tips} />
-    </div>
+      </Section>
+    </Container>
   )
 }
 

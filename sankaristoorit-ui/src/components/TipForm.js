@@ -1,14 +1,22 @@
 import React from 'react'
+import { Form, Button, Section } from 'react-bulma-components';
+
+const { Input, Field, Control, Label } = Form;
 
 const TipForm = (props) =>
+    <Section>
     <form onSubmit={props.addTip}>
-        <div>
-            title: <input id='title' value={props.newTitle}
+        <Field>
+            <Label>Title:</Label>
+            <Control>
+                <Input value={props.newTitle}
             onChange={props.handleTitleChange} />
-        </div>
-        <div></div>
-        <button id='create-button' type="submit">create</button>
+            </Control>
+        </Field>        
+        <Control>
+            <Button type="submit" color="primary">create</Button>
+        </Control>
     </form>
-
+    </Section>
 
 export default TipForm 
