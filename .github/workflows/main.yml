@@ -40,9 +40,9 @@ jobs:
     - name: Cypress-run
       uses: cypress-io/github-action@v2
       with:
-        start: npm run start:test --prefix ../sankaristoorit-backend/
+        start: npm run start:test --prefix ../sankaristoorit-backend/, npm start
         working-directory: sankaristoorit-ui
-        wait-on: 'http://localhost:3001/tips'
+        wait-on: 'http://localhost:3001/tips', 'http://localhost:3000'
         browser: chrome
         wait-on-timeout: 20
       env:
