@@ -18,3 +18,7 @@
 * integroitu muuhun ohjelmistoon
 * viety tuotantoympäristöön
   * Herokuapp
+
+### Linkki softaan
+
+[Heroku](https://sankaristoorit-ui.herokuapp.com)

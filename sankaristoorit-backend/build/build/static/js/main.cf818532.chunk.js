@@ -1,2 +1,0 @@
-(this["webpackJsonpsankaristoorit-ui"]=this["webpackJsonpsankaristoorit-ui"]||[]).push([[0],{9:function(t,e,n){"use strict";n.r(e);var r=n(0),i=n(1),o=n.n(i),s=n(3),c=function(){return Object(r.jsx)("h1",{children:"Hello world!"})},u=function(){return Object(r.jsx)(c,{})};n.n(s).a.render(Object(r.jsx)(o.a.StrictMode,{children:Object(r.jsx)(u,{})}),document.getElementById("root"))}},[[9,1,2]]]);
-//# sourceMappingURL=main.cf818532.chunk.js.map
