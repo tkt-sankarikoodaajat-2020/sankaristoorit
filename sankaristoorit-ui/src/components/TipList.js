@@ -1,5 +1,6 @@
 import React from 'react'
 import Tip from './Tip'
+import { Section } from 'react-bulma-components';
 
 const TipList = ({ tips }) => {
     console.log('Tips list ' + tips)

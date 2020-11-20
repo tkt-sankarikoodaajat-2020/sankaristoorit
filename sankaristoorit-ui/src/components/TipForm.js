@@ -14,7 +14,7 @@ const TipForm = (props) =>
             </Control>
         </Field>        
         <Control>
-            <Button id="create-button" type="submit" color="primary">create</Button>
+            <Button id="create-button" type="submit" color="primary">Create</Button>
         </Control>
     </form>
     </Section>
