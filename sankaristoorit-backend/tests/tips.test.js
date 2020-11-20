@@ -52,8 +52,6 @@ describe('POST TIPS TESTS', () => {
       title: 'Sankaristoori',
     }
 
-    console.log(newTip)
-
     await api
         .post('/tips')
         .send(newTip)
@@ -69,6 +67,15 @@ describe('POST TIPS TESTS', () => {
       ) 
   })
 
+  test('post fails without a title', async () => {
+    const newTip = { 
+    }
+
+    await api
+        .post('/tips')
+        .send(newTip)
+        .expect(400)     
+  })
 })
 
 afterAll(() => {

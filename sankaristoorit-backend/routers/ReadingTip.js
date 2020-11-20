@@ -39,6 +39,12 @@ tipsRouter.get('/', (req, res) => {
  */
 tipsRouter.post('/', (req, res, next) => {
   const body = req.body
+  
+  if (!body.title) {
+    return res.status(400).json({
+      error:'title missing'
+    })
+  }
 
   const tip = new Tips({
     title: body.title,
