@@ -42,8 +42,9 @@ jobs:
       with:
         start: npm run start:test --prefix ../sankaristoorit-backend/
         working-directory: sankaristoorit-ui
-        wait-on: 'http://localhost:3001'
+        wait-on: 'http://localhost:3001/tips'
         browser: chrome
+        wait-on-timeout: 20
       env:
         CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_KEY}}
         MONGODB_TEST_URI: ${{secrets.MONGODB_TEST_URI}}
