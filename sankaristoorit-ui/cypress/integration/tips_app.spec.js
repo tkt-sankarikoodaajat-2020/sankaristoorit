@@ -28,6 +28,6 @@ describe('Tips app ', function () {
       cy.contains('Delete').click()
     })
     cy.visit('http://localhost:3000')
-    cy.contains('Cy_testi').should('not.exist')  
+    cy.contains('Cy_testi').should('not.exist')
   })
 })
