@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Tip from './Tip'
 
 const tip = {
@@ -16,4 +16,17 @@ test('renders content', () => {
   expect(component.container).toHaveTextContent(
     'Header'
   )
+})
+
+test('clicking the delete-button calls event handler once', async () => {
+  const mockHandler = jest.fn()
+
+  const component = render (
+    <Tip tip={tip} deleteTip={mockHandler} />
+  )
+
+  const button = component.getByText('Delete')
+  fireEvent.click(button)
+
+  expect(mockHandler.mock.calls).toHaveLength(1)
 })

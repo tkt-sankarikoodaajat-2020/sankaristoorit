@@ -13,4 +13,9 @@ const create = async newObject => {
   return response.data
 }
 
-export default { getAll, create }
+const remove = (id) => {
+  const req = axios.delete(`${baseUrl}/${id}`)
+  req.then(console.log('tip deleted'))
+}
+
+export default { getAll, create, remove }

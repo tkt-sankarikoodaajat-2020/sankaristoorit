@@ -36,6 +36,11 @@ const App = () => {
       })
   }
 
+  const deleteTip = (id) => {
+    tipService
+      .remove(id)
+    setTips(tips.filter(t => t.id !== id))
+  }
 
   return (
     <Container>
@@ -62,7 +67,7 @@ const App = () => {
         <Heading subtitle size={3}>
           Tips
         </Heading>
-        <TipList tips={tips} />
+        <TipList tips={tips} deleteTip={deleteTip}/>
       </Section>
     </Container>
   )
