@@ -76,6 +76,17 @@ describe('POST TIPS TESTS', () => {
       .send(newTip)
       .expect(400)
   })
+
+  test('post fails with a blank title', async () => {
+    const newTip = {
+      title: ""
+    }
+
+    await api
+      .post('/tips')
+      .send(newTip)
+      .expect(400)
+  })
 })
 
 afterAll(() => {
