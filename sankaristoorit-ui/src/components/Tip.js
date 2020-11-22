@@ -7,7 +7,7 @@ const Tip = ({ tip, deleteTip }) => {
     <Section>
       <li className='message is-primary'>
         <h2 className='message-header'>{tip.title}<Button class='delete' onClick={() => deleteTip(tip.id)}>Delete</Button></h2>
-        <p clas='message-body'>message placeholder</p>
+        <p className='message-body'>message placeholder</p>
       </li>
     </Section>
   )

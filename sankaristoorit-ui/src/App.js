@@ -49,10 +49,10 @@ const App = () => {
           <Hero.Body>
             <Container>
               <Heading>
-              Sankaristoorit
+                Sankaristoorit
               </Heading>
               <Heading subtitle size={3}>
-              Ohjelmistotuotanto, syksy 2020
+                Ohjelmistotuotanto, syksy 2020
               </Heading>
             </Container>
           </Hero.Body>
@@ -60,14 +60,14 @@ const App = () => {
       </Section>
       <Section>
         <Heading subtitle size={3}>
-      Create a new tip
+          Create a new tip
         </Heading>
         <TipForm addTip={addTip} newTitle={newTitle}
           handleTitleChange={handleTitleChange} />
         <Heading subtitle size={3}>
           Tips
         </Heading>
-        <TipList tips={tips} deleteTip={deleteTip}/>
+        <TipList tips={tips} deleteTip={deleteTip} />
       </Section>
     </Container>
   )
