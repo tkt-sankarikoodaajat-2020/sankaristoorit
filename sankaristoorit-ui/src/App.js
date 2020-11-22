@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TipList from './components/TipList'
 import tipService from './services/tips'
 import TipForm from './components/TipForm'
+import ErrorBox from './components/ErrorBox'
 
 import { Hero, Heading, Section, Container } from 'react-bulma-components'
 
@@ -9,6 +10,7 @@ const App = () => {
 
   const [tips, setTips] = useState([])
   const [newTitle, setNewTitle] = useState('')
+  const [errorMsgs, setErrorMsgs] = useState([])
 
   useEffect(() => {
     tipService
@@ -34,12 +36,25 @@ const App = () => {
         setTips(tips.concat(res))
         setNewTitle('')
       })
+      .catch(error => addError('add', error))
   }
 
   const deleteTip = (id) => {
     tipService
       .remove(id)
+      .catch(error => addError('delete', error))
     setTips(tips.filter(t => t.id !== id))
+  }
+
+  const addError = (id, error) => {
+    setErrorMsgs(
+      errorMsgs.filter(e => e.id !== id)
+        .concat({ error: error.response.data.error || 'unknown error', id: id })
+    )
+  }
+
+  const dismissError = (id) => {
+    setErrorMsgs(errorMsgs.filter(e => e.id !== id))
   }
 
   return (
@@ -59,6 +74,7 @@ const App = () => {
         </Hero>
       </Section>
       <Section>
+        <ErrorBox errors={errorMsgs} dismissError={dismissError} />
         <Heading subtitle size={3}>
           Create a new tip
         </Heading>
