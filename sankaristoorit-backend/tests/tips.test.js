@@ -79,7 +79,7 @@ describe('POST TIPS TESTS', () => {
 
   test('post fails with a blank title', async () => {
     const newTip = {
-      title: ""
+      title: ''
     }
 
     await api
