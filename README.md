@@ -33,3 +33,7 @@
 * Integroitu muuhun ohjelmistoon
 * Viety tuotantoympäristöön
   * Herokuapp
+
+### Lisenssi
+
+[MIT](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/LICENCE.md)
