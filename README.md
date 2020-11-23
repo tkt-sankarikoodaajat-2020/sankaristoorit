@@ -2,6 +2,7 @@
 
 [![Sankaristoorit](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/y82e1k/master&style=flat-square&logo=cypress)](https://dashboard.cypress.io/projects/y82e1k/runs)
 ![Sankaristoorit CI](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/workflows/Sankaristoorit%20CI/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 #### Ohjelmistotuotanto 2020 Lukuvinkkisovellus
 
