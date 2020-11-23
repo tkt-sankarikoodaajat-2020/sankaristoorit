@@ -7,6 +7,7 @@ const errors = require('./utils/errors')
 const app = express()
 
 console.log('connecting to MongoDB: ' + conf.MONGODB_URI)
+mongoose.set('useFindAndModify', false)
 mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
