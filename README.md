@@ -36,4 +36,4 @@
 
 ### Lisenssi
 
-[MIT](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/LICENCE.md)
+[MIT](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/blob/master/LICENSE.md)
