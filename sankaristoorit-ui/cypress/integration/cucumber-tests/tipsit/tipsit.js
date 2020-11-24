@@ -17,5 +17,19 @@ And('I enter information about a tip', () => {
 })
 
 Then('a tip is created', () => {
+  cy.visit('http://localhost:3000')
   cy.contains('Cy_testi')
 })
+
+And('I press the delete button', () => {
+  cy.visit('http://localhost:3000')
+  cy.contains('Cy_testi').within(() => {
+    cy.contains('Delete').click()
+  })
+})
+
+Then('The tip is deleted', () => {
+  cy.visit('http://localhost:3000')
+  cy.contains('Cy_testi').should('not.exist')
+})
+

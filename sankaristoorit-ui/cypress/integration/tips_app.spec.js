@@ -3,9 +3,7 @@ describe('Tips app ', function () {
 
   beforeEach(function () {
     cy.visit('http://localhost:3000')
-    cy.get('#username').type('Testmies')
-    cy.get('#password').type('123456789')
-    cy.get('#login-button').click()
+    cy.login()
   })
 
   it('Can log in', function () {
