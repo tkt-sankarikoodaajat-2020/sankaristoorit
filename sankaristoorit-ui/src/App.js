@@ -53,7 +53,8 @@ const App = () => {
   }
   const handleLogout = (event) => {
     event.preventDefault()
-    console.log('clear local storage')
+    console.log('logout')
+    setUser(null)
     window.localStorage.clear()
   }
 
@@ -103,13 +104,6 @@ const App = () => {
     <TipForm addTip={addTip} newTitle={newTitle}
       handleTitleChange={handleTitleChange} />
   )
-  const renderLogout = () => (
-    <form onSubmit={handleLogout}>
-      <p>Logged in as {user}</p>
-      <Button id="logout-button" type="submit" color="secondary">Logout</Button>
-    </form>
-  )
-
 
   return (
     <Container>
@@ -123,7 +117,8 @@ const App = () => {
               <Heading subtitle size={3}>
                 Ohjelmistotuotanto, syksy 2020
               </Heading>
-              {user !== null && renderLogout()}
+              {user !== null &&
+                <Button id="logout-button" onClick={handleLogout}>Logout</Button>}
             </Container>
           </Hero.Body>
         </Hero>

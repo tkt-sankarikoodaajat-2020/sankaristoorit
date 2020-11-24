@@ -13,9 +13,9 @@ const LoginForm = ({
   return (
     <Section>
       <Heading subtitle size={3}>
-                Login
+        Login
       </Heading>
-      <form onSubmit={login}>
+      <form onSubmit={login} autoComplete="off">
         <Field>
           <Label>Username:</Label>
           <Control>
