@@ -5,12 +5,14 @@ import TipForm from './components/TipForm'
 import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
 
-import { Hero, Heading, Section, Container } from 'react-bulma-components'
+import { Hero, Heading, Section, Container, Button } from 'react-bulma-components'
 
 const App = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
+
   const [tips, setTips] = useState([])
   const [newTitle, setNewTitle] = useState('')
   const [errorMsgs, setErrorMsgs] = useState([])
@@ -21,6 +23,14 @@ const App = () => {
       .then(initialTips => {
         setTips(initialTips)
       })
+  }, [])
+
+  useEffect(() => {
+    const loggedUser = window.localStorage.getItem('user')
+    if (loggedUser) {
+      const userJSON = JSON.parse(loggedUser)
+      setUser(userJSON)
+    }
   }, [])
 
   const handleUsernameChange = (event) => {
@@ -35,14 +45,16 @@ const App = () => {
     setNewTitle(event.target.value)
   }
 
-  const login = (event) => {
+  const handleLogin = (event) => {
     event.preventDefault()
-    console.log('login pressed')
-    const userObject = {
-      username: username,
-      password: password
-    }
-    console.log(userObject)
+    console.log('logging in with', username, password)
+    setUser(username)
+    window.localStorage.setItem('user', JSON.stringify(username))
+  }
+  const handleLogout = (event) => {
+    event.preventDefault()
+    console.log('clear local storage')
+    window.localStorage.clear()
   }
 
   const addTip = (event) => {
@@ -78,6 +90,25 @@ const App = () => {
     setErrorMsgs(errorMsgs.filter(e => e.id !== id))
   }
 
+  const renderLogin = () => (
+    <LoginForm login={handleLogin}
+      username={username}
+      password={password}
+      handleUsernameChange={handleUsernameChange}
+      handlePasswordChange={handlePasswordChange} />
+
+  )
+
+  const renderTip = () => (
+    <TipForm addTip={addTip} newTitle={newTitle}
+      handleTitleChange={handleTitleChange} />
+  )
+  const renderLogout = () => (
+    <form onSubmit={handleLogout}>
+      <p>Logged in as {user}</p>
+      <Button id="logout-button" type="submit" color="secondary">Logout</Button>
+    </form>
+  )
 
 
   return (
@@ -92,15 +123,15 @@ const App = () => {
               <Heading subtitle size={3}>
                 Ohjelmistotuotanto, syksy 2020
               </Heading>
+              {user !== null && renderLogout()}
             </Container>
           </Hero.Body>
         </Hero>
       </Section>
       <Section>
         <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-        <LoginForm login={login} username={username} password={password} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange}></LoginForm>
-        <TipForm addTip={addTip} newTitle={newTitle}
-          handleTitleChange={handleTitleChange} />
+        {user === null ? renderLogin() : renderTip()}
+
         <TipList tips={tips} deleteTip={deleteTip} />
       </Section>
     </Container >

@@ -4,7 +4,6 @@ import Tip from './Tip'
 import { Section, Heading } from 'react-bulma-components'
 
 const TipList = ({ tips, deleteTip }) => {
-  console.log('Tips list ' + tips)
 
   const list = tips.map((tip) =>
     <Tip tip={tip} key={tip.id} deleteTip={deleteTip} />
