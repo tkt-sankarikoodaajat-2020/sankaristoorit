@@ -5,6 +5,10 @@ const tipSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: 1
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 

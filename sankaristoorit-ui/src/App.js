@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
 import TipList from './components/TipList'
 import tipService from './services/tips'
+import loginService from './services/login'
 import TipForm from './components/TipForm'
 import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
+import RegisterForm from './components/RegisterForm'
 
 import { Hero, Heading, Section, Container, Button } from 'react-bulma-components'
 
@@ -45,17 +51,28 @@ const App = () => {
     setNewTitle(event.target.value)
   }
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('logging in with', username, password)
-    setUser(username)
-    window.localStorage.setItem('user', JSON.stringify(username))
+    try {
+      const userObject = await loginService.login({
+        username, password,
+      })
+      window.localStorage.setItem('user', JSON.stringify(userObject)
+      )
+      console.log('logged in as', username)
+      setUser(userObject)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      console.log('exception loging in', exception)
+      setUsername('')
+      setPassword('')
+    }
   }
-  const handleLogout = (event) => {
-    event.preventDefault()
+  const handleLogout = () => {
     console.log('logout')
-    setUser(null)
     window.localStorage.clear()
+    setUser(null)
   }
 
   const addTip = (event) => {
@@ -91,45 +108,51 @@ const App = () => {
     setErrorMsgs(errorMsgs.filter(e => e.id !== id))
   }
 
-  const renderLogin = () => (
-    <LoginForm login={handleLogin}
-      username={username}
-      password={password}
-      handleUsernameChange={handleUsernameChange}
-      handlePasswordChange={handlePasswordChange} />
-
-  )
-
-  const renderTip = () => (
-    <TipForm addTip={addTip} newTitle={newTitle}
-      handleTitleChange={handleTitleChange} />
-  )
 
   return (
-    <Container>
-      <Section>
-        <Hero color="primary" >
-          <Hero.Body>
-            <Container>
-              <Heading>
-                Sankaristoorit
-              </Heading>
-              <Heading subtitle size={3}>
-                Ohjelmistotuotanto, syksy 2020
-              </Heading>
-              {user !== null &&
-                <Button id="logout-button" onClick={handleLogout}>Logout</Button>}
-            </Container>
-          </Hero.Body>
-        </Hero>
-      </Section>
-      <Section>
-        <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-        {user === null ? renderLogin() : renderTip()}
-
-        <TipList tips={tips} deleteTip={deleteTip} />
-      </Section>
-    </Container >
+    <Router>
+      <Container>
+        <Section>
+          <Hero color="primary" >
+            <Hero.Body>
+              <Container>
+                <Heading>
+                  Sankaristoorit
+                </Heading>
+                <Heading subtitle size={3}>
+                  Ohjelmistotuotanto, syksy 2020
+                </Heading>
+              </Container>
+            </Hero.Body>
+          </Hero>
+        </Section>
+        <Section>
+          <Link to="/"><Button color="link">Home</Button></Link>
+          <Link to="/register"><Button color="link">Register</Button></Link>
+          {user !== null &&
+            <Button onClick={handleLogout}>Logout</Button>}
+        </Section>
+        <Switch>
+          <Route path="/register">
+            <RegisterForm />
+          </Route>
+          <Route path="/">
+            <Section>
+              <ErrorBox errors={errorMsgs} dismissError={dismissError} />
+              {user === null &&
+                <LoginForm login={handleLogin}
+                  username={username}
+                  password={password}
+                  handleUsernameChange={handleUsernameChange}
+                  handlePasswordChange={handlePasswordChange} />}
+              <TipForm addTip={addTip} newTitle={newTitle}
+                handleTitleChange={handleTitleChange} />
+              <TipList tips={tips} deleteTip={deleteTip} />
+            </Section>
+          </Route>
+        </Switch>
+      </Container>
+    </Router>
   )
 }
 
