@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import TipList from './components/TipList'
 import tipService from './services/tips'
 import TipForm from './components/TipForm'
+import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
 
 import { Hero, Heading, Section, Container } from 'react-bulma-components'
 
 const App = () => {
 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [tips, setTips] = useState([])
   const [newTitle, setNewTitle] = useState('')
   const [errorMsgs, setErrorMsgs] = useState([])
@@ -20,8 +23,26 @@ const App = () => {
       })
   }, [])
 
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value)
+  }
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
+  }
+
   const handleTitleChange = (event) => {
     setNewTitle(event.target.value)
+  }
+
+  const login = (event) => {
+    event.preventDefault()
+    console.log('login pressed')
+    const userObject = {
+      username: username,
+      password: password
+    }
+    console.log(userObject)
   }
 
   const addTip = (event) => {
@@ -57,6 +78,8 @@ const App = () => {
     setErrorMsgs(errorMsgs.filter(e => e.id !== id))
   }
 
+
+
   return (
     <Container>
       <Section>
@@ -75,17 +98,12 @@ const App = () => {
       </Section>
       <Section>
         <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-        <Heading subtitle size={3}>
-          Create a new tip
-        </Heading>
+        <LoginForm login={login} username={username} password={password} handleUsernameChange={handleUsernameChange} handlePasswordChange={handlePasswordChange}></LoginForm>
         <TipForm addTip={addTip} newTitle={newTitle}
           handleTitleChange={handleTitleChange} />
-        <Heading subtitle size={3}>
-          Tips
-        </Heading>
         <TipList tips={tips} deleteTip={deleteTip} />
       </Section>
-    </Container>
+    </Container >
   )
 }
 
