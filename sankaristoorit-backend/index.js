@@ -1,6 +1,8 @@
 const app = require('./app')
+const http = require('http')
 const conf = require('./utils/config')
 
-app.listen(conf.PORT, () => {
+const server = http.createServer(app)
+server.listen(conf.PORT, () => {
   console.log('Running on port: ' + conf.PORT)
 })
