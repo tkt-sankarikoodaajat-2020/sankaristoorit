@@ -3,13 +3,6 @@ describe('Tips app ', function () {
 
   beforeEach(function () {
     cy.visit('http://localhost:3000')
-    cy.get('#username').type('Testmies')
-    cy.get('#password').type('123456789')
-    cy.get('#login-button').click()
-  })
-
-  it('Can log in', function () {
-    cy.get('Login').should('not.exist')
   })
 
   it('Page is rendered correctly', function () {
@@ -36,10 +29,5 @@ describe('Tips app ', function () {
     })
     cy.visit('http://localhost:3000')
     cy.contains('Cy_testi').should('not.exist')
-  })
-
-  it('Can log out', function() {
-    cy.get('#logout-button').click()
-    cy.contains('Login')
   })
 })
