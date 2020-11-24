@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
 import TipList from './components/TipList'
 import tipService from './services/tips'
 import TipForm from './components/TipForm'
 import ErrorBox from './components/ErrorBox'
+import RegisterForm from './components/RegisterForm'
 
-import { Hero, Heading, Section, Container } from 'react-bulma-components'
+import { Hero, Heading, Section, Container, Button } from 'react-bulma-components'
 
 const App = () => {
 
@@ -58,34 +63,47 @@ const App = () => {
   }
 
   return (
-    <Container>
-      <Section>
-        <Hero color="primary" >
-          <Hero.Body>
-            <Container>
-              <Heading>
+    <Router>
+      <Container>
+        <Section>
+          <Hero color="primary" >
+            <Hero.Body>
+              <Container>
+                <Heading>
                 Sankaristoorit
-              </Heading>
-              <Heading subtitle size={3}>
+                </Heading>
+                <Heading subtitle size={3}>
                 Ohjelmistotuotanto, syksy 2020
-              </Heading>
-            </Container>
-          </Hero.Body>
-        </Hero>
-      </Section>
-      <Section>
-        <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-        <Heading subtitle size={3}>
+                </Heading>
+              </Container>
+            </Hero.Body>
+          </Hero>
+        </Section>
+        <Section>
+          <Link to="/"><Button color="link">Home</Button></Link>
+          <Link to="/register"><Button color="link">Register</Button></Link>
+        </Section>
+        <Switch>
+          <Route path="/register">
+            <RegisterForm />
+          </Route>
+          <Route path="/">
+            <Section>
+              <ErrorBox errors={errorMsgs} dismissError={dismissError} />
+              <Heading subtitle size={3}>
           Create a new tip
-        </Heading>
-        <TipForm addTip={addTip} newTitle={newTitle}
-          handleTitleChange={handleTitleChange} />
-        <Heading subtitle size={3}>
+              </Heading>
+              <TipForm addTip={addTip} newTitle={newTitle}
+                handleTitleChange={handleTitleChange} />
+              <Heading subtitle size={3}>
           Tips
-        </Heading>
-        <TipList tips={tips} deleteTip={deleteTip} />
-      </Section>
-    </Container>
+              </Heading>
+              <TipList tips={tips} deleteTip={deleteTip} />
+            </Section>
+          </Route>
+        </Switch>
+      </Container>
+    </Router>
   )
 }
 
