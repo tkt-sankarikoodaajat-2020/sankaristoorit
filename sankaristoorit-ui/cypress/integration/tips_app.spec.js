@@ -15,7 +15,7 @@ describe('Tips app ', function () {
     cy.contains('First')
   })
 
-  it('Creating a tip works correctly', function() {
+  it('Creating a tip works correctly', function () {
     cy.contains('Create').click()
     cy.get('#title').type('Cy_testi')
     cy.get('#create-button').click()
@@ -23,7 +23,7 @@ describe('Tips app ', function () {
     cy.contains('Cy_testi')
   })
 
-  it('Deleting a tip works correctly', function() {
+  it('Deleting a tip works correctly', function () {
     cy.contains('Cy_testi').within(() => {
       cy.contains('Delete').click()
     })

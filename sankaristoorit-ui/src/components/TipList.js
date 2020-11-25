@@ -1,20 +1,24 @@
 import React from 'react'
 import Tip from './Tip'
-//import { Section } from 'react-bulma-components'
+
+import { Section, Heading } from 'react-bulma-components'
 
 const TipList = ({ tips, deleteTip }) => {
-  console.log('Tips list ' + tips)
 
   const list = tips.map((tip) =>
-    <Tip tip={tip} key={tip.id} deleteTip={deleteTip}/>
+    <Tip tip={tip} key={tip.id} deleteTip={deleteTip} />
   )
 
   return (
-    <div>
+    <Section>
+      <Heading subtitle size={3}>
+        Tips
+      </Heading>
       <ul>
         {list}
       </ul>
-    </div>
+
+    </Section>
   )
 }
 
