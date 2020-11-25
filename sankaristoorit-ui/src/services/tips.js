@@ -10,8 +10,8 @@ const getAll = () => {
 }
 
 const create = async newObject => {
-  const token = localStorage.getItem('token')
-  if (!token) return {}
+  let token = localStorage.getItem('token')
+  if (!token) token = ''
   const config = {
     headers: {
       'Authorization': 'bearer ' + token

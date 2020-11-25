@@ -27,7 +27,8 @@ tipsRouter.get('/', (req, res) => {
  * @apiVersion 0.0.0
  * @apiName Tips
  * @apiGroup Tips
- *
+ * @apiParam {String} title
+ * @apiHeader {String} Authorization OPTIONAL bearer auth
  *
  * @apiHeader          Accept application/json
  * @apiSuccessExample {json} Success-Response:
