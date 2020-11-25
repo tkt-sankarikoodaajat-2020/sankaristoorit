@@ -57,8 +57,8 @@ const App = () => {
       const userObject = await loginService.login({
         username, password,
       })
-      window.localStorage.setItem('user', JSON.stringify(userObject)
-      )
+      localStorage.setItem('token', userObject.token)
+      window.localStorage.setItem('username', userObject.username)
       console.log('logged in as', username)
       setUser(userObject)
       setUsername('')
