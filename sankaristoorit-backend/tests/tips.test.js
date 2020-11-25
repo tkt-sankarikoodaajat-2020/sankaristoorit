@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const api = supertest(app)
 const Tip = require('../models/Tip')
+const helper = require('./test_helper')
 
 const initialTips = [
   {
@@ -12,6 +13,7 @@ const initialTips = [
     title: 'Second test title'
   }
 ]
+
 
 beforeEach(async () => {
   await Tip.deleteMany({})
@@ -86,6 +88,57 @@ describe('POST TIPS TESTS', () => {
       .post('/tips')
       .send(newTip)
       .expect(400)
+  })
+})
+
+describe('tips with user test', () => {
+  test('a valid tip with a valid user can be created', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    const user = await helper.createUser(username, password)
+    const newTip = {
+      title: 'Usertips'
+    }
+
+    const token = await api.post('/login').send({ username, password })
+
+    await api
+      .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
+      .send(newTip)
+      .expect(200)
+
+    const res = await api.get('/tips')
+    const contents = res.body.map(r => r.title)
+    const ids = res.body.map(r => r.user)
+
+    expect(res.body).toHaveLength(initialTips.length + 1)
+    expect(contents).toContain('Usertips')
+    expect(ids).toContain(user.id)
+  })
+
+  test('after tip created user has tip id', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const newTip = {
+      title: 'Usertips2'
+    }
+
+    const token = await api.post('/login').send({ username, password })
+
+    await api
+      .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
+      .send(newTip)
+      .expect(200)
+
+    const tips = await api.get('/tips')
+    const createdTip = tips.body.find(t => t.title === 'Usertips2')
+    const users = await helper.usersInDb()
+    const testuser = users.find(u => u.username === username)
+    const userTips = testuser.tips.map(String)
+    expect(userTips).toContain(createdTip.id)
   })
 })
 

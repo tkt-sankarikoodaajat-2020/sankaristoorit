@@ -1,5 +1,7 @@
 const tipsRouter = require('express').Router()
 const Tips = require('../models/Tip')
+const User = require('../models/User')
+const jwt = require('jsonwebtoken')
 
 /**
  * @api {get} /tips Request List of Tips
@@ -25,7 +27,8 @@ tipsRouter.get('/', (req, res) => {
  * @apiVersion 0.0.0
  * @apiName Tips
  * @apiGroup Tips
- *
+ * @apiParam {String} title
+ * @apiHeader {String} Authorization OPTIONAL bearer auth
  *
  * @apiHeader          Accept application/json
  * @apiSuccessExample {json} Success-Response:
@@ -37,8 +40,19 @@ tipsRouter.get('/', (req, res) => {
  *        }
  *      ]
  */
-tipsRouter.post('/', (req, res, next) => {
+tipsRouter.post('/', async (req, res, next) => {
   const body = req.body
+
+  const token = req.token
+
+  let id = ''
+  if (token && token.length > 0) {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'token invalid' })
+    }
+    id = decodedToken.id
+  }
 
   if (!body.title) {
     return res.status(400).json({
@@ -46,17 +60,26 @@ tipsRouter.post('/', (req, res, next) => {
     })
   }
 
-  const tip = new Tips({
-    title: body.title,
-  })
+  const obj = {
+    title: body.title
+  }
 
-  tip
-    .save()
-    .then(savedTip => savedTip.toJSON())
-    .then(savedAndFormattedTip => {
-      res.json(savedAndFormattedTip)
-    })
-    .catch(error => next(error))
+  if (id !== '') obj.user = id
+
+  const tip = new Tips(obj)
+  try {
+    const savedTip = await tip.save()
+
+    if (id !== '') {
+      await User.updateOne(
+        { _id: id },
+        { $push: { tips: savedTip.id } }
+      )
+    }
+    return res.json(savedTip)
+  } catch (e) {
+    next(e)
+  }
 })
 /**
  * @api {delete} /tips/:id Delete Tip with id

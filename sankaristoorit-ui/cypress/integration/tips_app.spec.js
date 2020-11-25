@@ -16,11 +16,10 @@ describe('Tips app ', function () {
   })
 
   it('Creating a tip works correctly', function () {
-    cy.contains('Create').click()
-    cy.get('#title').type('Cy_testi')
+    cy.contains('Create')
+    cy.get('#title').type('Cy_testi2')
     cy.get('#create-button').click()
-
-    cy.contains('Cy_testi')
+    cy.contains('Cy_testi2')
   })
 
   it('Deleting a tip works correctly', function () {

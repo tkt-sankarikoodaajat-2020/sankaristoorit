@@ -10,7 +10,14 @@ const getAll = () => {
 }
 
 const create = async newObject => {
-  const response = await axios.post(baseUrl, newObject)
+  let token = localStorage.getItem('token')
+  if (!token) token = ''
+  const config = {
+    headers: {
+      'Authorization': 'bearer ' + token
+    }
+  }
+  const response = await axios.post(baseUrl, newObject, config)
   return response.data
 }
 

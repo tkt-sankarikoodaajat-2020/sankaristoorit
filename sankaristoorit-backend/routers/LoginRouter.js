@@ -1,7 +1,24 @@
 const bcrypt = require('bcrypt')
 const loginRouter = require('express').Router()
 const User = require('../models/User')
+const jwt = require('jsonwebtoken')
 
+/**
+ * @api {post} /login post credentials to login
+ * @apiVersion 0.0.0
+ * @apiName Login
+ * @apiGroup Login
+ * @apiParam {String} username
+ * @apiParam {String} password
+ *
+ * @apiHeader          Accept application/json
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+ *        token: 'jwtSignedToken',
+ *        username: 'username'
+ *      }
+ */
 loginRouter.post('/', async (request, response) => {
   const body = request.body
 
@@ -16,9 +33,14 @@ loginRouter.post('/', async (request, response) => {
     })
   }
 
+  const token = await jwt.sign(
+    { id: user.id },
+    process.env.SECRET
+  )
+
   response
     .status(200)
-    .send({ username: user.username })
+    .send({ username: user.username, token })
 })
 
 module.exports = loginRouter
