@@ -8,7 +8,6 @@ const tipSchema = mongoose.Schema({
   },
   url: {
     type: String,
-    minlength: 1
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

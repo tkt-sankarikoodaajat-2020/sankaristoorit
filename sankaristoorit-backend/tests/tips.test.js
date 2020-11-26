@@ -42,7 +42,6 @@ describe('DELETE TIPS TESTS', () => {
     const id = response.body[1].id
     await api.delete('/tips/' + id)
     const responseAfterDelete = await api.get('/tips')
-    console.log(responseAfterDelete.body)
     expect(responseAfterDelete.body.length).toBe(1)
   })
 })
