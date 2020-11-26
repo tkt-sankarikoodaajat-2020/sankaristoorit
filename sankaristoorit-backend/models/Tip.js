@@ -6,6 +6,10 @@ const tipSchema = mongoose.Schema({
     required: true,
     minlength: 1
   },
+  url: {
+    type: String,
+    minlength: 1
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

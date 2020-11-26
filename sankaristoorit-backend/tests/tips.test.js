@@ -52,6 +52,7 @@ describe('POST TIPS TESTS', () => {
   test('a valid tip can be added', async () => {
     const newTip = {
       title: 'Sankaristoori',
+      url: 'https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
     }
 
     await api
@@ -61,12 +62,14 @@ describe('POST TIPS TESTS', () => {
       .expect('Content-Type', /application\/json/)
 
     const response = await api.get('/tips')
-    const contents = response.body.map(r => r.title)
+    const titles = response.body.map(r => r.title)
+    const urls = response.body.map(u => u.url)
 
     expect(response.body).toHaveLength(initialTips.length + 1)
-    expect(contents).toContain(
+    expect(titles).toContain(
       'Sankaristoori'
     )
+    expect(urls).toContain('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
   })
 
   test('post fails without a title', async () => {
@@ -77,6 +80,38 @@ describe('POST TIPS TESTS', () => {
       .post('/tips')
       .send(newTip)
       .expect(400)
+  })
+
+  test('post fails with incorrect url-format', async () => {
+    const newTip = {
+      title: 'WithoutUrl',
+      url: 'htps://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
+    }
+
+    await api
+      .post('/tips')
+      .send(newTip)
+      .expect(400)
+  })
+
+  test('post works without url', async () => {
+    const newTip = {
+      title: 'WithoutUrl',
+    }
+
+    await api
+      .post('/tips')
+      .send(newTip)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/tips')
+    const titles = response.body.map(r => r.title)
+
+    expect(response.body).toHaveLength(initialTips.length + 1)
+    expect(titles).toContain(
+      'WithoutUrl'
+    )
   })
 
   test('post fails with a blank title', async () => {
