@@ -96,8 +96,8 @@ describe('POST TIPS TESTS', () => {
   test('post works without url', async () => {
     const newTip = {
       title: 'WithoutUrl',
+      url: null
     }
-
     await api
       .post('/tips')
       .send(newTip)
@@ -131,7 +131,8 @@ describe('tips with user test', () => {
     const password = 'testipassu'
     const user = await helper.createUser(username, password)
     const newTip = {
-      title: 'Usertips'
+      title: 'Usertips',
+      url: 'https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
     }
 
     const token = await api.post('/login').send({ username, password })
@@ -156,7 +157,8 @@ describe('tips with user test', () => {
     const password = 'testipassu'
     await helper.createUser(username, password)
     const newTip = {
-      title: 'Usertips2'
+      title: 'Usertips2',
+      url: null
     }
 
     const token = await api.post('/login').send({ username, password })
