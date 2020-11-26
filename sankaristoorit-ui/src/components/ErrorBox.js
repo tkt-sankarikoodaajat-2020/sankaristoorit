@@ -13,8 +13,6 @@ const ErrorBox = ({ errors, dismissError }) => {
     return (<Error key={e.id} error={e} dismissError={dismissError} />)
   })
 
-  console.log(list)
-
   return (
     <Section>
       {list}

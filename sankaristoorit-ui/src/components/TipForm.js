@@ -15,6 +15,11 @@ const TipForm = (props) =>
           <Input id="title" value={props.newTitle}
             onChange={props.handleTitleChange} />
         </Control>
+        <Label>Url:</Label>
+        <Control>
+          <Input id="url" value={props.newUrl}
+            onChange={props.handleUrlChange} placeholder={'e.g. https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'} />
+        </Control>
       </Field>
       <Control>
         <Button id="create-button" type="submit" color="primary">Create</Button>

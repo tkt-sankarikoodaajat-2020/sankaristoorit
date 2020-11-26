@@ -21,6 +21,7 @@ const App = () => {
 
   const [tips, setTips] = useState([])
   const [newTitle, setNewTitle] = useState('')
+  const [newUrl, setNewUrl] = useState('')
   const [errorMsgs, setErrorMsgs] = useState([])
 
   useEffect(() => {
@@ -51,6 +52,10 @@ const App = () => {
     setNewTitle(event.target.value)
   }
 
+  const handleUrlChange = (event) => {
+    setNewUrl(event.target.value)
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -79,6 +84,11 @@ const App = () => {
     event.preventDefault()
     const tipObject = {
       title: newTitle,
+      url: newUrl,
+    }
+
+    if (tipObject.url === '') {
+      tipObject.url = null
     }
 
     tipService
@@ -86,6 +96,7 @@ const App = () => {
       .then(res => {
         setTips(tips.concat(res))
         setNewTitle('')
+        setNewUrl('')
       })
       .catch(error => addError('add', error))
   }
@@ -146,7 +157,8 @@ const App = () => {
                   handleUsernameChange={handleUsernameChange}
                   handlePasswordChange={handlePasswordChange} />}
               <TipForm addTip={addTip} newTitle={newTitle}
-                handleTitleChange={handleTitleChange} />
+                handleTitleChange={handleTitleChange} newUrl={newUrl}
+                handleUrlChange={handleUrlChange}/>
               <TipList tips={tips} deleteTip={deleteTip} />
             </Section>
           </Route>
