@@ -1,6 +1,7 @@
 import React from 'react'
 import { Section, Button } from 'react-bulma-components'
 
+
 const UrlOrNot = ( { url } ) => {
   if (url !== null || url !== '') {
     return <p className='message-body'>{url}</p>
@@ -9,6 +10,7 @@ const UrlOrNot = ( { url } ) => {
 }
 
 const Tip = ({ tip, deleteTip }) => {
+
 
   return (
     <Section>

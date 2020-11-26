@@ -51,21 +51,21 @@ const RegisterForm = () => {
           <Label>Username:</Label>
           <Control>
             <Input id="username" value={username}
-              onChange={handleUsernameChange} />
+              onChange={(event) => handleUsernameChange(event)} />
           </Control>
         </Field>
         <Field>
           <Label>Password:</Label>
           <Control>
             <Input type='password' id="password" value={password}
-              onChange={handlePasswordChange} />
+              onChange={(event) => handlePasswordChange(event)} />
           </Control>
         </Field>
         <Field>
           <Label>Confirm Password:</Label>
           <Control>
             <Input type='password' id="password-confirm" value={confirmPassword}
-              onChange={handleConfirmPasswordChange} />
+              onChange={(event) => handleConfirmPasswordChange(event)} />
           </Control>
         </Field>
         <Control>

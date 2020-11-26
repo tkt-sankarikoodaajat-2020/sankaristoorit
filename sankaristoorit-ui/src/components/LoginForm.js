@@ -20,14 +20,14 @@ const LoginForm = ({
           <Label>Username:</Label>
           <Control>
             <Input type="text" id="username" value={username}
-              onChange={handleUsernameChange} required />
+              onChange={(event) => handleUsernameChange(event)} required />
           </Control>
         </Field>
         <Field>
           <Label>Password:</Label>
           <Control>
             <Input type="password" id="password" value={password}
-              onChange={handlePasswordChange} required />
+              onChange={(event) => handlePasswordChange(event)} required />
           </Control>
         </Field>
         <Control>
