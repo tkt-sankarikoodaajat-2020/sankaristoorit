@@ -33,10 +33,10 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    const loggedUser = window.localStorage.getItem('user')
-    if (loggedUser) {
-      const userJSON = JSON.parse(loggedUser)
-      setUser(userJSON)
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const loggedUser = JSON.parse(loggedUserJSON)
+      setUser(loggedUser)
     }
   }, [])
 
@@ -63,7 +63,7 @@ const App = () => {
         username, password,
       })
       localStorage.setItem('token', userObject.token)
-      window.localStorage.setItem('username', userObject.username)
+      window.localStorage.setItem('loggedUser', JSON.stringify(userObject))
       console.log('logged in as', username)
       setUser(userObject)
       setUsername('')
@@ -158,7 +158,7 @@ const App = () => {
                   handlePasswordChange={handlePasswordChange} />}
               <TipForm addTip={addTip} newTitle={newTitle}
                 handleTitleChange={handleTitleChange} newUrl={newUrl}
-                handleUrlChange={handleUrlChange}/>
+                handleUrlChange={handleUrlChange} />
               <TipList tips={tips} deleteTip={deleteTip} />
             </Section>
           </Route>
