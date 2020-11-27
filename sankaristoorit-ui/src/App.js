@@ -11,7 +11,7 @@ import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
 import RegisterForm from './components/RegisterForm'
 
-import { Hero, Heading, Section, Container, Button } from 'react-bulma-components'
+import { Hero, Heading, Section, Container, Button, Navbar } from 'react-bulma-components'
 
 const App = () => {
 
@@ -122,27 +122,29 @@ const App = () => {
 
   return (
     <Router>
-      <Container>
-        <Section>
-          <Hero color="primary" >
-            <Hero.Body>
-              <Container>
-                <Heading>
-                  Sankaristoorit
-                </Heading>
-                <Heading subtitle size={3}>
-                  Ohjelmistotuotanto, syksy 2020
-                </Heading>
-              </Container>
-            </Hero.Body>
-          </Hero>
-        </Section>
-        <Section>
-          <Link to="/"><Button color="link">Home</Button></Link>
-          <Link to="/register"><Button color="link">Register</Button></Link>
+      <Navbar role="navigation" fixed="top" color="dark">
+        <Container>
+          <Link className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></Link>
+          <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+          <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
           {user !== null &&
-            <Button onClick={handleLogout}>Logout</Button>}
-        </Section>
+            <Link className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></Link>
+          }
+        </Container>
+      </Navbar>
+      <Container>
+        <Hero color="primary">
+          <br></br>
+          <Hero.Body>
+            <Heading subtitle size={1}>
+              Sankaristoorit
+            </Heading>
+            <Heading subtitle size={2}>
+              Ohjelmistotuotanto, syksy 2020
+            </Heading>
+          </Hero.Body>
+          <br></br>
+        </Hero>
         <Switch>
           <Route path="/register">
             <RegisterForm />
@@ -163,8 +165,8 @@ const App = () => {
             </Section>
           </Route>
         </Switch>
-      </Container>
-    </Router>
+      </Container >
+    </Router >
   )
 }
 
