@@ -9,13 +9,20 @@ const UrlOrNot = ( { url } ) => {
   return <p className='message-body'></p>
 }
 
+const LinkOrHeader = ( { url, title, id, deleteTip } ) => {
+  if (url !== null || url !== '') {
+    return <h2 className='message-header'><a href={url}>{title}</a><Button className='delete' onClick={() => deleteTip(id)}>Delete</Button></h2>
+  }
+  return <h2 className='message-header'>{title}<Button className='delete' onClick={() => deleteTip(id)}>Delete</Button></h2>
+}
+
 const Tip = ({ tip, deleteTip }) => {
 
 
   return (
     <Section>
       <li className='message is-primary'>
-        <h2 className='message-header'>{tip.title}<Button className='delete' onClick={() => deleteTip(tip.id)}>Delete</Button></h2>
+        <LinkOrHeader url={tip.url} title={tip.title} id={tip.id} deleteTip={deleteTip} />
         <UrlOrNot url={tip.url} />
       </li>
     </Section>
