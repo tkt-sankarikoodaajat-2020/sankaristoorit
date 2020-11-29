@@ -25,9 +25,9 @@ When('I enter a tip with bad url-format', () => {
 
 When('I press delete on a tip', () => {
   cy.contains('Create').click()
-  cy.get('#title').type('Delete_testi')
+  cy.get('#title').type('delet_testi')
   cy.get('#create-button').click()
-  cy.contains('Delete_testi').within(() => {
+  cy.contains('h2', 'delet_testi').within(() => {
     cy.contains('Delete').click()
   })
 })
