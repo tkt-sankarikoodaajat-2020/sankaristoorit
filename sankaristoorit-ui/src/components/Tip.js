@@ -3,14 +3,14 @@ import { Section, Button } from 'react-bulma-components'
 
 
 const UrlOrNot = ( { url } ) => {
-  if (url !== null || url !== '') {
+  if (url !== null && url !== '') {
     return <p className='message-body'>{url}</p>
   }
   return <p className='message-body'></p>
 }
 
 const LinkOrHeader = ( { url, title, id, deleteTip } ) => {
-  if (url !== null || url !== '') {
+  if (url !== null && url !== '') {
     return <h2 className='message-header'><a href={url}>{title}</a><Button className='delete' onClick={() => deleteTip(id)}>Delete</Button></h2>
   }
   return <h2 className='message-header'>{title}<Button className='delete' onClick={() => deleteTip(id)}>Delete</Button></h2>
