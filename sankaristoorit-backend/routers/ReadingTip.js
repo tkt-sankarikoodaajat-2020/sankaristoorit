@@ -2,6 +2,7 @@ const tipsRouter = require('express').Router()
 const Tips = require('../models/Tip')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
+const { validURL } = require('../utils/middleware')
 
 /**
  * @api {get} /tips Request List of Tips
@@ -60,8 +61,18 @@ tipsRouter.post('/', async (req, res, next) => {
     })
   }
 
+  if(body.url !== null) {
+    console.log('bodyUrl: ', body.url)
+    if (!validURL(body.url)) {
+      return res.status(400).json({
+        error: 'url is incorrect'
+      })
+    }
+  }
+
   const obj = {
-    title: body.title
+    title: body.title,
+    url: body.url
   }
 
   if (id !== '') obj.user = id

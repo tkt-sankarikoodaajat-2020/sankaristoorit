@@ -13,7 +13,12 @@ const TipForm = (props) =>
         <Label>Title:</Label>
         <Control>
           <Input id="title" value={props.newTitle}
-            onChange={props.handleTitleChange} />
+            onChange={(event) => props.handleTitleChange(event)} />
+        </Control>
+        <Label>Url:</Label>
+        <Control>
+          <Input id="url" value={props.newUrl}
+            onChange={(event) => props.handleUrlChange(event)} placeholder={'e.g. https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'} />
         </Control>
       </Field>
       <Control>

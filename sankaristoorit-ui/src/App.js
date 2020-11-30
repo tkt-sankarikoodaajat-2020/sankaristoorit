@@ -11,7 +11,7 @@ import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
 import RegisterForm from './components/RegisterForm'
 
-import { Hero, Heading, Section, Container, Button } from 'react-bulma-components'
+import { Hero, Heading, Section, Container, Button, Navbar } from 'react-bulma-components'
 
 const App = () => {
 
@@ -21,6 +21,7 @@ const App = () => {
 
   const [tips, setTips] = useState([])
   const [newTitle, setNewTitle] = useState('')
+  const [newUrl, setNewUrl] = useState('')
   const [errorMsgs, setErrorMsgs] = useState([])
 
   useEffect(() => {
@@ -32,10 +33,10 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    const loggedUser = window.localStorage.getItem('user')
-    if (loggedUser) {
-      const userJSON = JSON.parse(loggedUser)
-      setUser(userJSON)
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const loggedUser = JSON.parse(loggedUserJSON)
+      setUser(loggedUser)
     }
   }, [])
 
@@ -51,6 +52,10 @@ const App = () => {
     setNewTitle(event.target.value)
   }
 
+  const handleUrlChange = (event) => {
+    setNewUrl(event.target.value)
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -58,7 +63,7 @@ const App = () => {
         username, password,
       })
       localStorage.setItem('token', userObject.token)
-      window.localStorage.setItem('username', userObject.username)
+      window.localStorage.setItem('loggedUser', JSON.stringify(userObject))
       console.log('logged in as', username)
       setUser(userObject)
       setUsername('')
@@ -79,6 +84,11 @@ const App = () => {
     event.preventDefault()
     const tipObject = {
       title: newTitle,
+      url: newUrl,
+    }
+
+    if (tipObject.url === '') {
+      tipObject.url = null
     }
 
     tipService
@@ -86,6 +96,7 @@ const App = () => {
       .then(res => {
         setTips(tips.concat(res))
         setNewTitle('')
+        setNewUrl('')
       })
       .catch(error => addError('add', error))
   }
@@ -111,27 +122,29 @@ const App = () => {
 
   return (
     <Router>
-      <Container>
-        <Section>
-          <Hero color="primary" >
-            <Hero.Body>
-              <Container>
-                <Heading>
-                  Sankaristoorit
-                </Heading>
-                <Heading subtitle size={3}>
-                  Ohjelmistotuotanto, syksy 2020
-                </Heading>
-              </Container>
-            </Hero.Body>
-          </Hero>
-        </Section>
-        <Section>
-          <Link to="/"><Button color="link">Home</Button></Link>
-          <Link to="/register"><Button color="link">Register</Button></Link>
+      <Navbar role="navigation" fixed="top" color="dark">
+        <Container>
+          <Link className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></Link>
+          <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+          <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
           {user !== null &&
-            <Button onClick={handleLogout}>Logout</Button>}
-        </Section>
+            <Link className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></Link>
+          }
+        </Container>
+      </Navbar>
+      <Container>
+        <Hero color="primary">
+          <br></br>
+          <Hero.Body>
+            <Heading subtitle size={1}>
+              Sankaristoorit
+            </Heading>
+            <Heading subtitle size={2}>
+              Ohjelmistotuotanto, syksy 2020
+            </Heading>
+          </Hero.Body>
+          <br></br>
+        </Hero>
         <Switch>
           <Route path="/register">
             <RegisterForm />
@@ -146,13 +159,14 @@ const App = () => {
                   handleUsernameChange={handleUsernameChange}
                   handlePasswordChange={handlePasswordChange} />}
               <TipForm addTip={addTip} newTitle={newTitle}
-                handleTitleChange={handleTitleChange} />
+                handleTitleChange={handleTitleChange} newUrl={newUrl}
+                handleUrlChange={handleUrlChange} />
               <TipList tips={tips} deleteTip={deleteTip} />
             </Section>
           </Route>
         </Switch>
-      </Container>
-    </Router>
+      </Container >
+    </Router >
   )
 }
 
