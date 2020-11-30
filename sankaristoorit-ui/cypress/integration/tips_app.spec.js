@@ -39,10 +39,9 @@ describe('Tips app ', function () {
   })
 
   it('Deleting a tip works correctly', function () {
-    cy.contains('Cy_testi').within(() => {
+    cy.contains('h2', 'Cy_testi2').within(() => {
       cy.contains('Delete').click()
     })
-    cy.visit('http://localhost:3000')
-    cy.contains('Cy_testi').should('not.exist')
+    cy.contains('Cy_testi2').should('not.exist')
   })
 })
