@@ -17,22 +17,24 @@
 
 [Backlogs](https://github.com/orgs/tkt-sankarikoodaajat-2020/projects/1)
 
+[Mongo-Models](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/blob/master/sankaristoorit-backend/mongomodels-uml.png)
+
 ### Definition of done
 
-* Analysoitu
-* Suunniteltu
-* Ohjelmoitu
-* Testattu
-  * Front- & backend jestillä
-  * End to end Cypress
-* Testaus automatisoitu
-  * GitHub actions
-* Dokumentoitu
-  * API-docs md tiedostoon
-  * Tietotyypit (Mongomodelit)
-* Integroitu muuhun ohjelmistoon
-* Viety tuotantoympäristöön
-  * Herokuapp
+- Analysoitu
+- Suunniteltu
+- Ohjelmoitu
+- Testattu
+  - Front- & backend jestillä
+  - End to end Cypress
+- Testaus automatisoitu
+  - GitHub actions
+- Dokumentoitu
+  - API-docs md tiedostoon
+  - Tietotyypit (Mongomodelit)
+- Integroitu muuhun ohjelmistoon
+- Viety tuotantoympäristöön
+  - Herokuapp
 
 ### Lisenssi
 

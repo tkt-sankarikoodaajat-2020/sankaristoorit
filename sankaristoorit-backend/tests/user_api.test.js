@@ -16,6 +16,12 @@ describe('when there is initially one user at db', () => {
     await user.save()
   })
 
+  test('one username is returned with get', async () => {
+    const result = await api.get('/users').expect(200).expect('Content-Type', /application\/json/)
+
+    expect(result.body).toHaveLength(1)
+  })
+
   test('creation succeeds with a fresh username', async () => {
     const usersAtStart = await helper.usersInDb()
 
@@ -99,5 +105,15 @@ describe('when there is initially one user at db', () => {
 
   afterAll(() => {
     mongoose.connection.close()
+  })
+})
+
+describe('Test 404 page', () => {
+  test('Unknown endpoint message is returned', async () => {
+    const result = await api
+      .get('/unknown')
+      .expect(404)
+
+    expect(result.body.error).toContain('unknown endpoint')
   })
 })
