@@ -21,6 +21,15 @@ usersRouter.get('/', async (request, response) => {
   response.json(users.map((u) => u.toJSON()))
 })
 
+usersRouter.get('/:name', async (request, response) => {
+  const user = await User.findOne({ username: request.params.name })
+  if (user) {
+    return response.status(200).json({ usernameAvailable: false })
+  } else {
+    return response.status(200).json({ usernameAvailable: true })
+  }
+})
+
 /**
  * @api {post} /users Register a new user
  * @apiVersion 0.0.0

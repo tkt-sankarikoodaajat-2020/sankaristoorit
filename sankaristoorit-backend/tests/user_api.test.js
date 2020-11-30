@@ -102,6 +102,23 @@ describe('when there is initially one user at db', () => {
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
+  describe('Test endpoint for username availability', () => {
+    test('API should respond with user available', async () => {
+      const result = await api
+        .get('/users/sankari')
+        .expect(200)
+
+      expect(result.body.usernameAvailable).toBe(true)
+    })
+
+    test('API should respond with user NOT available', async () => {
+      const result = await api
+        .get('/users/root')
+        .expect(200)
+
+      expect(result.body.usernameAvailable).toBe(false)
+    })
+  })
 
   afterAll(() => {
     mongoose.connection.close()

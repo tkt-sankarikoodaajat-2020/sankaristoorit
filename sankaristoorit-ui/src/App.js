@@ -124,11 +124,13 @@ const App = () => {
     <Router>
       <Navbar role="navigation" fixed="top" color="dark">
         <Container>
-          <Link className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></Link>
+          <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
           <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+          {user === null &&
           <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
+          }
           {user !== null &&
-            <Link className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></Link>
+            <div className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
           }
         </Container>
       </Navbar>
@@ -147,7 +149,9 @@ const App = () => {
         </Hero>
         <Switch>
           <Route path="/register">
-            <RegisterForm />
+            <RegisterForm login={handleLogin}
+              setLoginUsername={setUsername}
+              setLoginPassword={setPassword}/>
           </Route>
           <Route path="/">
             <Section>

@@ -8,6 +8,11 @@ const getAll = () => {
   return req.then(res => res.data)
 }
 
+const checkIfUserExists = (name) => {
+  const req = axios.get(baseUrl + '/' + name)
+  return req
+}
+
 const create = async newUser => {
   const response = await axios.post(baseUrl, newUser)
   return response.data
@@ -18,4 +23,4 @@ const remove = (id) => {
   return req.then(console.log('user deleted'))
 }
 
-export default { getAll, create, remove }
+export default { getAll, checkIfUserExists, create, remove }

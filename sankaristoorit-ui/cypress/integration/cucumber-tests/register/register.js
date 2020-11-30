@@ -9,30 +9,29 @@ When('I click register', () => {
 })
 
 When('I enter information a correct username and password',() => {
-  cy.get('#username').type('newuser')
+  cy.get('#username').type('newuserforregistration')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWord')
-  cy.get('#signup-button').click()
+  cy.get('#signup-button').should('have.class', 'is-primary')
 })
 
 When('I enter a too short username', () => {
   cy.get('#username').type('n')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWord')
-  cy.get('#signup-button').click()
 })
 
 When('I enter a valid username but the passwords dont match', () => {
   cy.get('#username').type('newuser')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWordsss')
-  cy.get('#signup-button').click()
 })
 
 Then('I am sent to the front page',() => {
+  cy.get('#signup-button').click()
   cy.contains('Create a new tip')
 })
 
 Then('I am still on the register page', () => {
-  cy.contains('Confirm Password:')
+  cy.get('#signup-button').should('have.class', 'is-light')
 })
