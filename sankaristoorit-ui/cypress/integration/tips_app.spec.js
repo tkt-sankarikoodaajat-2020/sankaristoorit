@@ -16,16 +16,16 @@ describe('Tips app ', function () {
 
   it('Creating a tip works correctly with valid data', function () {
     cy.contains('Create')
-    cy.get('#title').type('Cy_testi2')
+    cy.get('#title').type('Cy_testi_2')
     cy.get('#url').type('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
     cy.get('#create-button').click()
-    cy.contains('Cy_testi2')
+    cy.contains('Cy_testi_2')
     cy.contains('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
   })
 
   it('Creating a tip fails with incorrect url', function () {
     cy.contains('Create')
-    cy.get('#title').type('Cy_testi2')
+    cy.get('#title').type('Cy_testi_2')
     cy.get('#url').type('hps://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
     cy.get('#create-button').click()
     cy.contains('url is incorrect')
@@ -39,9 +39,9 @@ describe('Tips app ', function () {
   })
 
   it('Deleting a tip works correctly', function () {
-    cy.contains('h2', 'Cy_testi2').within(() => {
+    cy.contains('h2', 'Cy_testi_2').within(() => {
       cy.contains('Delete').click()
     })
-    cy.contains('Cy_testi2').should('not.exist')
+    cy.contains('Cy_testi_2').should('not.exist')
   })
 })
