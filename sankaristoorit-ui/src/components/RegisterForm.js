@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Section } from 'react-bulma-components'
+import { Form, Button, Section, Heading } from 'react-bulma-components'
 import userService from '../services/users'
 import { useHistory } from 'react-router-dom'
 
@@ -46,6 +46,7 @@ const RegisterForm = () => {
 
   return(
     <Section>
+      <Heading title='size:3'>Register as a new user</Heading>
       <form onSubmit={addUser}>
         <Field>
           <Label>Username:</Label>
