@@ -1,6 +1,7 @@
 # TKT sankarikoodaajat2020 sankaristoorit
 
 [![Sankaristoorit](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/y82e1k/master&style=flat-square&logo=cypress)](https://dashboard.cypress.io/projects/y82e1k/runs)
+[![codecov](https://codecov.io/gh/tkt-sankarikoodaajat-2020/sankaristoorit/branch/master/graph/badge.svg?token=RMKET52MUV)](https://codecov.io/gh/tkt-sankarikoodaajat-2020/sankaristoorit)
 ![Sankaristoorit CI](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/workflows/Sankaristoorit%20CI/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
