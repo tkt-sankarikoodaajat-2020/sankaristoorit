@@ -24,7 +24,7 @@ jobs:
       run: npm run lint
       working-directory: sankaristoorit-ui
     - name: test frontend jest tests
-      run: npm run test -- --coverage --watchAll=false
+      run: npm run test -- --coverage --watchAll=false --collectCoverageFrom=src/components/*
       working-directory: sankaristoorit-ui
     - name: npm ci backend
       run: npm ci
