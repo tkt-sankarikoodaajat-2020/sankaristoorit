@@ -13,10 +13,14 @@ const tips = [
     title: 'Header 2'
   }
 ]
+const user = {
+  username: 'testman',
+  id: 10
+}
 
 test('renders content', () => {
   const component = render(
-    <TipList tips={tips} />
+    <TipList tips={tips} user={user} />
   )
 
   expect(component.container).toHaveTextContent(

@@ -64,7 +64,7 @@ const App = () => {
       })
       localStorage.setItem('token', userObject.token)
       window.localStorage.setItem('loggedUser', JSON.stringify(userObject))
-      console.log('logged in as', username)
+      console.log('logged in as', userObject.username)
       setUser(userObject)
       setUsername('')
       setPassword('')
@@ -174,7 +174,7 @@ const App = () => {
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
               disabled={user === null} />
-            <TipList tips={tips} deleteTip={deleteTip} />
+            <TipList tips={tips} deleteTip={deleteTip} user={user} />
           </Route>
         </Switch>
       </Container >
