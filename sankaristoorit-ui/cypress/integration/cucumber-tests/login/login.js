@@ -9,7 +9,7 @@ When('I click register', () => {
 })
 
 When('I enter information a correct username and password',() => {
-  cy.get('#username').type('newuser')
+  cy.get('#username').type('newuserlogin')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWord')
   cy.get('#signup-button').click()
@@ -21,7 +21,7 @@ Given('I am on the front page', () => {
 })
 
 When('I enter correct information', () => {
-  cy.get('#username').type('newuser')
+  cy.get('#username').type('newuserlogin')
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
 })
@@ -41,5 +41,5 @@ Then('I am not logged in', () => {
 })
 
 Then('I am sent to the front page',() => {
-  cy.contains('Create a new tip')
+  cy.contains('Tips')
 })

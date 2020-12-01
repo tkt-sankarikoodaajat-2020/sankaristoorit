@@ -29,7 +29,7 @@ When('I enter a valid username but the passwords dont match', () => {
 
 Then('I am sent to the front page',() => {
   cy.get('#signup-button').click()
-  cy.contains('Create a new tip')
+  cy.contains('Tips')
 })
 
 Then('I am still on the register page', () => {

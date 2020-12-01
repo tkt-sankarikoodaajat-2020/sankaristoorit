@@ -7,10 +7,12 @@ describe('Tips app ', function () {
 
   it('Page is rendered correctly', function () {
     cy.contains('Sankaristoorit')
-    cy.contains('Create a new tip')
+    cy.contains('Tips')
+    cy.contains('Login')
+    cy.contains('Register')
   })
 
-  it('Tips are rendered correclty', function () {
+  it('Tips are rendered correctly', function () {
     cy.contains('Tips')
   })
 

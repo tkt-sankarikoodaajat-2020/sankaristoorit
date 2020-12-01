@@ -162,9 +162,10 @@ const App = () => {
                   password={password}
                   handleUsernameChange={handleUsernameChange}
                   handlePasswordChange={handlePasswordChange} />}
-              <TipForm addTip={addTip} newTitle={newTitle}
-                handleTitleChange={handleTitleChange} newUrl={newUrl}
-                handleUrlChange={handleUrlChange} />
+              {user !== null &&
+                <TipForm addTip={addTip} newTitle={newTitle}
+                  handleTitleChange={handleTitleChange} newUrl={newUrl}
+                  handleUrlChange={handleUrlChange} />}
               <TipList tips={tips} deleteTip={deleteTip} />
             </Section>
           </Route>
