@@ -4,6 +4,10 @@ Given('I am on the front page',() => {
   cy.visit('http://localhost:3000')
 })
 
+Given('I am on the login page',() => {
+  cy.visit('http://localhost:3000/login')
+})
+
 When('I click register', () => {
   cy.contains('Register').click()
 })

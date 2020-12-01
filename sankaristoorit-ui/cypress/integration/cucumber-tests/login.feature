@@ -9,12 +9,12 @@ Then I am sent to the front page
 
 Scenario: Loggin succeeds with correct credentials
 
-Given I am on the front page
+Given I am on the login page
 When I enter correct information
 Then I am logged in
 
 Scenario: Loggin fails with wrong password
 
-Given I am on the front page
+Given I am on the login page
 And I enter a wrong password
 Then I am not logged in

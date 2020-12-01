@@ -170,12 +170,6 @@ const App = () => {
           </Route>
           <Route path="/">
             <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-            {user === null &&
-              <LoginForm login={handleLogin}
-                username={username}
-                password={password}
-                handleUsernameChange={handleUsernameChange}
-                handlePasswordChange={handlePasswordChange} />}
             <TipForm addTip={addTip} newTitle={newTitle}
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}

@@ -5,11 +5,13 @@ Given('I am on the front page', () => {
 })
 
 Given('I am logged in', () => {
-  cy.intercept('POST','/login').as('login')
+  cy.contains('Login').click()
+  cy.intercept('POST', '/login').as('login')
   cy.get('#username').type('testuser')
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
+  cy.contains('Home').click()
 })
 
 When('I create a tip with a link', () => {

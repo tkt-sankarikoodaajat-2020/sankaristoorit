@@ -17,11 +17,13 @@ describe('Tips app ', function () {
   })
 
   const loginHelper = () => {
+    cy.contains('Login').click()
     cy.intercept('POST','/login').as('login')
     cy.get('#username').type('testuser')
     cy.get('#password').type('passWord')
     cy.get('#login-button').click()
     cy.wait('@login')
+    cy.contains('Home').click()
   }
 
   it('Creating a tip works correctly with valid data', function () {
