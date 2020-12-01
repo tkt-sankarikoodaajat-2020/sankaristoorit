@@ -5,8 +5,8 @@ const { Input, Field, Control, Label } = Form
 
 const TipForm = (props) =>
   <Section>
-    <Heading subtitle size={3}>
-          Create a new tip
+    <Heading title='size:3'>
+      Create a new tip
     </Heading>
     <form onSubmit={props.addTip}>
       <Field>
