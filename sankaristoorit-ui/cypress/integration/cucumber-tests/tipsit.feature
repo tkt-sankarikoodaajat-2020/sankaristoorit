@@ -28,3 +28,14 @@ And I am logged in
 When I press delete on a tip
 Then a tip is deleted
 
+Scenario: Deleting when not logged in
+
+When I logout
+Then Delete should not be visible
+
+Scenario: Delete now showing for other users
+
+Given I am on the front page
+And I am logged in using another account
+Then Delete should not be visible
+
