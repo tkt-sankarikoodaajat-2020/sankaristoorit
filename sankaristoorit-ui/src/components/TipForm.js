@@ -13,16 +13,18 @@ const TipForm = (props) =>
         <Label>Title:</Label>
         <Control>
           <Input id="title" value={props.newTitle}
-            onChange={(event) => props.handleTitleChange(event)} />
+            onChange={(event) => props.handleTitleChange(event)}
+            disabled={props.disabled} />
         </Control>
         <Label>Url:</Label>
         <Control>
           <Input id="url" value={props.newUrl}
-            onChange={(event) => props.handleUrlChange(event)} placeholder={'e.g. https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'} />
+            onChange={(event) => props.handleUrlChange(event)} placeholder={'e.g. https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'}
+            disabled={props.disabled} />
         </Control>
       </Field>
       <Control>
-        <Button id="create-button" type="submit" color="primary">Create</Button>
+        <Button id="create-button" type="submit" color="primary" disabled={props.disabled}>Create</Button>
       </Control>
     </form>
   </Section>

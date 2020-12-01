@@ -164,7 +164,8 @@ const App = () => {
                   handlePasswordChange={handlePasswordChange} />}
               <TipForm addTip={addTip} newTitle={newTitle}
                 handleTitleChange={handleTitleChange} newUrl={newUrl}
-                handleUrlChange={handleUrlChange} />
+                handleUrlChange={handleUrlChange}
+                disabled={user === null} />
               <TipList tips={tips} deleteTip={deleteTip} />
             </Section>
           </Route>

@@ -7,14 +7,29 @@ describe('Tips app ', function () {
 
   it('Page is rendered correctly', function () {
     cy.contains('Sankaristoorit')
-    cy.contains('Create a new tip')
+    cy.contains('Tips')
+    cy.contains('Login')
+    cy.contains('Register')
   })
 
-  it('Tips are rendered correclty', function () {
+  it('Tips are rendered correctly', function () {
     cy.contains('Tips')
   })
 
+  const loginHelper = () => {
+    cy.contains('Register').click()
+    cy.get('#username').type('newuserspecfile')
+    cy.get('#password').type('passWord')
+    cy.get('#password-confirm').type('passWord')
+    cy.get('#signup-button').click()
+    cy.visit('http://localhost:3000')
+    cy.get('#username').type('newuserspecfile')
+    cy.get('#password').type('passWord')
+    cy.get('#login-button').click()
+  }
+
   it('Creating a tip works correctly with valid data', function () {
+    loginHelper()
     cy.contains('Create')
     cy.get('#title').type('Cy_testi_2')
     cy.get('#url').type('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
@@ -24,6 +39,7 @@ describe('Tips app ', function () {
   })
 
   it('Creating a tip fails with incorrect url', function () {
+    loginHelper()
     cy.contains('Create')
     cy.get('#title').type('Cy_testi_2')
     cy.get('#url').type('hps://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
@@ -32,6 +48,7 @@ describe('Tips app ', function () {
   })
 
   it('Creating a tip fails without title with correct url', function () {
+    loginHelper()
     cy.contains('Create')
     cy.get('#url').type('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
     cy.get('#create-button').click()
@@ -39,6 +56,7 @@ describe('Tips app ', function () {
   })
 
   it('Deleting a tip works correctly', function () {
+    loginHelper()
     cy.contains('h2', 'Cy_testi_2').within(() => {
       cy.contains('Delete').click()
     })
