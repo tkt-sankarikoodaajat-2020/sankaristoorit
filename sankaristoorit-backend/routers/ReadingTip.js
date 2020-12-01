@@ -55,6 +55,10 @@ tipsRouter.post('/', async (req, res, next) => {
     id = decodedToken.id
   }
 
+  if (id === '' || !await User.exists({ _id: id })) {
+    return res.status(401).json({ error: 'not logged in' })
+  }
+
   if (!body.title) {
     return res.status(400).json({
       error: 'title missing'

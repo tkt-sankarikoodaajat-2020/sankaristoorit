@@ -49,6 +49,10 @@ describe('DELETE TIPS TESTS', () => {
 
 describe('POST TIPS TESTS', () => {
   test('a valid tip can be added', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const token = await api.post('/login').send({ username, password })
     const newTip = {
       title: 'Sankaristoori',
       url: 'https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
@@ -56,6 +60,7 @@ describe('POST TIPS TESTS', () => {
 
     await api
       .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
       .send(newTip)
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -72,16 +77,25 @@ describe('POST TIPS TESTS', () => {
   })
 
   test('post fails without a title', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const token = await api.post('/login').send({ username, password })
     const newTip = {
     }
 
     await api
       .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
       .send(newTip)
       .expect(400)
   })
 
   test('post fails with incorrect url-format', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const token = await api.post('/login').send({ username, password })
     const newTip = {
       title: 'WithoutUrl',
       url: 'htps://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
@@ -89,17 +103,23 @@ describe('POST TIPS TESTS', () => {
 
     await api
       .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
       .send(newTip)
       .expect(400)
   })
 
   test('post works without url', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const token = await api.post('/login').send({ username, password })
     const newTip = {
       title: 'WithoutUrl',
       url: null
     }
     await api
       .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
       .send(newTip)
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -114,12 +134,17 @@ describe('POST TIPS TESTS', () => {
   })
 
   test('post fails with a blank title', async () => {
+    const username = 'jussi'
+    const password = 'testipassu'
+    await helper.createUser(username, password)
+    const token = await api.post('/login').send({ username, password })
     const newTip = {
       title: ''
     }
 
     await api
       .post('/tips')
+      .set({ 'Authorization': 'bearer ' + token.body.token })
       .send(newTip)
       .expect(400)
   })
@@ -175,6 +200,24 @@ describe('tips with user test', () => {
     const testuser = users.find(u => u.username === username)
     const userTips = testuser.tips.map(String)
     expect(userTips).toContain(createdTip.id)
+  })
+
+  test('a valid tip without a valid user cannot be created', async () => {
+    const newTip = {
+      title: 'Usertips',
+      url: 'https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
+    }
+
+    await api
+      .post('/tips')
+      .send(newTip)
+      .expect(401)
+
+    const res = await api.get('/tips')
+    const contents = res.body.map(r => r.title).filter(t => t === newTip.title)
+
+    expect(res.body).toHaveLength(initialTips.length)
+    expect(contents).toHaveLength(0)
   })
 })
 
