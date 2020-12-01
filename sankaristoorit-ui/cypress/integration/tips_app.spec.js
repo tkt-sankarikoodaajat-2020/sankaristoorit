@@ -17,15 +17,11 @@ describe('Tips app ', function () {
   })
 
   const loginHelper = () => {
-    cy.contains('Register').click()
-    cy.get('#username').type('newuserspecfile')
-    cy.get('#password').type('passWord')
-    cy.get('#password-confirm').type('passWord')
-    cy.get('#signup-button').click()
-    cy.visit('http://localhost:3000')
-    cy.get('#username').type('newuserspecfile')
+    cy.intercept('POST','/login').as('login')
+    cy.get('#username').type('testuser')
     cy.get('#password').type('passWord')
     cy.get('#login-button').click()
+    cy.wait('@login')
   }
 
   it('Creating a tip works correctly with valid data', function () {

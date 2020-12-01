@@ -5,15 +5,11 @@ Given('I am on the front page', () => {
 })
 
 Given('I am logged in', () => {
-  cy.contains('Register').click()
-  cy.get('#username').type('newusertips')
-  cy.get('#password').type('passWord')
-  cy.get('#password-confirm').type('passWord')
-  cy.get('#signup-button').click()
-  cy.visit('http://localhost:3000')
-  cy.get('#username').type('newusertips')
+  cy.intercept('POST','/login').as('login')
+  cy.get('#username').type('testuser')
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
+  cy.wait('@login')
 })
 
 When('I enter information about a tip', () => {

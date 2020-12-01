@@ -12,7 +12,9 @@ When('I enter information a correct username and password',() => {
   cy.get('#username').type('newuserlogin')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWord')
+  cy.intercept('/users/newuserlogin').as('register')
   cy.get('#signup-button').click()
+  cy.wait('@register')
 })
 
 Given('I am on the front page', () => {
@@ -21,9 +23,11 @@ Given('I am on the front page', () => {
 })
 
 When('I enter correct information', () => {
-  cy.get('#username').type('newuserlogin')
+  cy.intercept('POST','/login').as('login')
+  cy.get('#username').type('testuser')
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
+  cy.wait('@login')
 })
 
 When('I enter a wrong password', () => {
