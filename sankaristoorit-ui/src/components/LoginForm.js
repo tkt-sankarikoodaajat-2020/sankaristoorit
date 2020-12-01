@@ -12,7 +12,7 @@ const LoginForm = ({
 }) => {
   return (
     <Section>
-      <Heading subtitle size={3}>
+      <Heading title='size:3'>
         Login
       </Heading>
       <form onSubmit={login} autoComplete="off">

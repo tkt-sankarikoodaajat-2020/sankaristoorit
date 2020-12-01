@@ -126,11 +126,11 @@ const App = () => {
         <Container>
           <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
           <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
-          {user === null &&
-          <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
-          }
-          {user !== null &&
-            <div className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
+          <Link className="navbar-item" to="/login"><Button size="small" color="link">Login</Button></Link>
+          {user === null ?
+            <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
+            :
+            <div className="navbar-item"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
           }
         </Container>
       </Navbar>
@@ -149,25 +149,38 @@ const App = () => {
         </Hero>
         <Switch>
           <Route path="/register">
-            <RegisterForm login={handleLogin}
-              setLoginUsername={setUsername}
-              setLoginPassword={setPassword}/>
+            {user === null &&
+              <RegisterForm login={handleLogin}
+                setLoginUsername={setUsername}
+                setLoginPassword={setPassword} />}
+          </Route>
+          <Route path="/login">
+            {user === null ?
+              <LoginForm login={handleLogin}
+                username={username}
+                password={password}
+                handleUsernameChange={handleUsernameChange}
+                handlePasswordChange={handlePasswordChange} />
+              :
+              <Section>
+                <Heading>You are logged in as: {user.username}</Heading>
+                <Button size="small" color="danger" onClick={handleLogout}>Logout</Button>
+              </Section>
+            }
           </Route>
           <Route path="/">
-            <Section>
-              <ErrorBox errors={errorMsgs} dismissError={dismissError} />
-              {user === null &&
-                <LoginForm login={handleLogin}
-                  username={username}
-                  password={password}
-                  handleUsernameChange={handleUsernameChange}
-                  handlePasswordChange={handlePasswordChange} />}
-              <TipForm addTip={addTip} newTitle={newTitle}
-                handleTitleChange={handleTitleChange} newUrl={newUrl}
-                handleUrlChange={handleUrlChange}
-                disabled={user === null} />
-              <TipList tips={tips} deleteTip={deleteTip} />
-            </Section>
+            <ErrorBox errors={errorMsgs} dismissError={dismissError} />
+            {user === null &&
+              <LoginForm login={handleLogin}
+                username={username}
+                password={password}
+                handleUsernameChange={handleUsernameChange}
+                handlePasswordChange={handlePasswordChange} />}
+            <TipForm addTip={addTip} newTitle={newTitle}
+              handleTitleChange={handleTitleChange} newUrl={newUrl}
+              handleUrlChange={handleUrlChange}
+              disabled={user === null} />
+            <TipList tips={tips} deleteTip={deleteTip} />
           </Route>
         </Switch>
       </Container >
