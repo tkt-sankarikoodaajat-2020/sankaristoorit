@@ -92,7 +92,7 @@ const RegisterForm = ({
           <Label>Username:</Label>
           <Control>
             <Input color={!validators.usernameAvailable ? 'danger' : username.length > 1 ? 'success' : null } id="username" value={username}
-              onChange={(event) => handleUsernameChange(event)} />
+              onChange={handleUsernameChange} />
           </Control>
           { !validators.usernameLength && username.length > 0 &&
             <Help color="danger">Please enter a username with at least 2 characters</Help>
@@ -105,7 +105,7 @@ const RegisterForm = ({
           <Label>Password:</Label>
           <Control>
             <Input color={validators.passwordLength ? 'success' : password.length > 0 ? 'danger' : null } type='password' id="password" value={password}
-              onChange={(event) => handlePasswordChange(event)} />
+              onChange={handlePasswordChange} />
           </Control>
           { !validators.passwordLength && password.length > 0 &&
             <Help color="danger">Please enter a password with at least 6 characters</Help>
@@ -115,7 +115,7 @@ const RegisterForm = ({
           <Label>Confirm Password:</Label>
           <Control>
             <Input color={validators.passwordsMatch ? 'success' : confirmPassword.length > 0 ? 'danger' : null} type='password' id="password-confirm" value={confirmPassword}
-              onChange={(event) => handleConfirmPasswordChange(event)} />
+              onChange={handleConfirmPasswordChange} />
           </Control>
           { !validators.passwordsMatch && confirmPassword.length > 0 &&
             <Help color="danger">Please enter matching passwords</Help>
