@@ -119,20 +119,28 @@ const App = () => {
     setErrorMsgs(errorMsgs.filter(e => e.id !== id))
   }
 
+  const LoggedOut = () => (
+    <Container>
+      <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
+      <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+      <Link className="navbar-item" to="/login"><Button size="small" color="link">Login</Button></Link>
+      <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
+    </Container>
+  )
+
+  const LoggedIn = () => (
+    <Container>
+      <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
+      <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+      <div className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
+    </Container>
+  )
 
   return (
     <Router>
       <Navbar role="navigation" fixed="top" color="dark">
-        <Container>
-          <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
-          <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
-          <Link className="navbar-item" to="/login"><Button size="small" color="link">Login</Button></Link>
-          {user === null ?
-            <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
-            :
-            <div className="navbar-item"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
-          }
-        </Container>
+        {user === null && LoggedOut()}
+        {user !== null && LoggedIn()}
       </Navbar>
       <Container>
         <Hero color="primary">
