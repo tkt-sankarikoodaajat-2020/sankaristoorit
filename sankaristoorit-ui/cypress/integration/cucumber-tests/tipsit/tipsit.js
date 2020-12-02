@@ -51,8 +51,18 @@ When('I press delete on a tip', () => {
     cy.contains('Delete').click()
   })
 })
+
 When('I logout', () => {
   cy.contains('Logout').click()
+})
+
+When('I press checkbox to show my own tips', () => {
+  cy.get('#checkbox').click()
+})
+
+When('I doubleclick checkbox to show all the tips and see that the button works', () => {
+  cy.get('#checkbox').click()
+  cy.get('#checkbox').click()
 })
 
 Then('a tip is created', () => {
@@ -62,6 +72,15 @@ Then('a tip is created', () => {
 
 Then('a tip without a title is not added', () => {
   cy.contains('title missing')
+})
+
+Then('only my tips are shown', () => {
+  cy.contains('Cy_testi')
+})
+
+Then('all the tips are shown', () => {
+  cy.contains('Cy_testi')
+  cy.contains('link_test')
 })
 
 Then('a tip is not added', () => {
