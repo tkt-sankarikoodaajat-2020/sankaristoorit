@@ -11,7 +11,7 @@ Given('I am logged in', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.contains('Home').click()
+  cy.get('#home-button').click()
 })
 
 Given('I am logged in using another account', () => {
@@ -21,7 +21,7 @@ Given('I am logged in using another account', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.contains('Home').click()
+  cy.get('#home-button').click()
 })
 
 When('I enter information about a tip', () => {

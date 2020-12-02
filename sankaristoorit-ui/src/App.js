@@ -122,7 +122,7 @@ const App = () => {
   const LoggedOut = () => (
     <Container>
       <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
-      <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+      <Link className="navbar-item" to="/"><Button id="home-button" size="small" color="link">Home</Button></Link>
       <Link className="navbar-item" to="/login"><Button size="small" color="link">Login</Button></Link>
       <Link className="navbar-item" to="/register"><Button size="small" color="link">Register</Button></Link>
     </Container>
@@ -131,7 +131,7 @@ const App = () => {
   const LoggedIn = () => (
     <Container>
       <div className="navbar-item"><img src={process.env.PUBLIC_URL + '/logo192.png'} /></div>
-      <Link className="navbar-item" to="/"><Button size="small" color="link">Home</Button></Link>
+      <Link className="navbar-item" to="/"><Button id="home-button" size="small" color="link">Home</Button></Link>
       <div className="navbar-item navbar-end"><Button size="small" color="danger" onClick={handleLogout}>Logout</Button></div>
     </Container>
   )

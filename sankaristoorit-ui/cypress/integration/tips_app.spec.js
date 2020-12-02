@@ -23,7 +23,7 @@ describe('Tips app ', function () {
     cy.get('#password').type('passWord')
     cy.get('#login-button').click()
     cy.wait('@login')
-    cy.contains('Home').click()
+    cy.get('#home-button').click()
   }
 
   it('Creating a tip works correctly with valid data', function () {
