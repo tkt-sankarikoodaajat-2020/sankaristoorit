@@ -16,10 +16,11 @@ mongoose.set('useFindAndModify', false)
 mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
-    if ( process.env.NODE_ENV === 'test' ) {
+    if (process.env.NODE_ENV === 'test') {
       console.log('Initializing test database')
       const testInitializer = require('./utils/testInitializer')
       testInitializer.run()
+      testInitializer.addSecond()
     }
   })
   .catch((error) => {

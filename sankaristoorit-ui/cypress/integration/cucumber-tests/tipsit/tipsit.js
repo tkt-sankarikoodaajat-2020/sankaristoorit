@@ -6,8 +6,18 @@ Given('I am on the front page', () => {
 
 Given('I am logged in', () => {
   cy.contains('Login').click()
-  cy.intercept('POST','/login').as('login')
+  cy.intercept('POST', '/login').as('login')
   cy.get('#username').type('testuser')
+  cy.get('#password').type('passWord')
+  cy.get('#login-button').click()
+  cy.wait('@login')
+  cy.contains('Home').click()
+})
+
+Given('I am logged in using another account', () => {
+  cy.contains('Login').click()
+  cy.intercept('POST', '/login').as('login')
+  cy.get('#username').type('secondUser')
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
@@ -41,6 +51,9 @@ When('I press delete on a tip', () => {
     cy.contains('Delete').click()
   })
 })
+When('I logout', () => {
+  cy.contains('Logout').click()
+})
 
 Then('a tip is created', () => {
   cy.contains('Cy_testi')
@@ -57,4 +70,10 @@ Then('a tip is not added', () => {
 
 Then('a tip is deleted', () => {
   cy.contains('Delete_testi').should('not.exist')
+})
+
+Then('Delete should not be visible', () => {
+  cy.contains('h2', 'Cy_test').within(() => {
+    cy.contains('Delete').should('not.exist')
+  })
 })
