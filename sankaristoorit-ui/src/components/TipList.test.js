@@ -29,4 +29,8 @@ test('renders content', () => {
   expect(component.container).toHaveTextContent(
     'Header 2'
   )
+
+  expect(component.container).toHaveTextContent(
+    'Show only my own tips'
+  )
 })
