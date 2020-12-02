@@ -19,7 +19,7 @@ describe('when there is initially one user at db', () => {
   test('one username is returned with get', async () => {
     const result = await api.get('/users').expect(200).expect('Content-Type', /application\/json/)
 
-    expect(result.body).toHaveLength(2)
+    expect(result.body).toHaveLength(1)
   })
 
   test('creation succeeds with a fresh username', async () => {
