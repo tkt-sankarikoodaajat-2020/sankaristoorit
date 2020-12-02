@@ -66,7 +66,6 @@ tipsRouter.post('/', async (req, res, next) => {
   }
 
   if(body.url !== null) {
-    console.log('bodyUrl: ', body.url)
     if (!validURL(body.url)) {
       return res.status(400).json({
         error: 'url is incorrect'
