@@ -18,7 +18,6 @@ When('I enter information a correct username and password',() => {
   cy.get('#password-confirm').type('passWord')
   cy.intercept('/users/newuserlogin').as('register')
   cy.get('#signup-button').click()
-  cy.wait('@register')
 })
 
 Given('I am on the front page', () => {

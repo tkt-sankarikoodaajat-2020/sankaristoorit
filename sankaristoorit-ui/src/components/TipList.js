@@ -50,7 +50,7 @@ const TipList = ({ tips, deleteTip, user }) => {
         {user === null ? <span></span>
           : <Label>
             <Checkbox id="checkbox" checked={showOwn} onChange={checkboxHandler} />
-            Show only my own tips yy</Label> }
+            Show only my own tips </Label> }
         <TipSearch handler={searchHandler} />
       </Level>
       <ul>
