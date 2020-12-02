@@ -8,13 +8,8 @@ const run = async () => {
   const passwordHash = await bcrypt.hash('passWord', 10)
   const user = new User({ username: 'testuser', passwordHash })
   await user.save()
-}
-const addSecond = async () => {
-  await Tip.deleteMany({})
-  await User.deleteMany({})
-  const passwordHash = await bcrypt.hash('passWord', 10)
-  const user = new User({ username: 'secondUser', passwordHash })
-  await user.save()
+  const user2 = new User({ username: 'secondUser', passwordHash })
+  await user2.save()
 }
 
-module.exports = { run, addSecond }
+module.exports = { run }

@@ -20,7 +20,6 @@ mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: 
       console.log('Initializing test database')
       const testInitializer = require('./utils/testInitializer')
       testInitializer.run()
-      testInitializer.addSecond()
     }
   })
   .catch((error) => {
