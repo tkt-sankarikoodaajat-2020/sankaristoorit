@@ -3,6 +3,7 @@ const Tips = require('../models/Tip')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { validURL } = require('../utils/middleware')
+const { response } = require('express')
 
 /**
  * @api {get} /tips Request List of Tips
@@ -109,5 +110,20 @@ tipsRouter.delete('/:id', (req, res, next) => {
     })
     .catch(error => next(error))
 })
-
+/**
+ * Apidoc here
+ */
+tipsRouter.put('/:id', (req, res, next) => {
+  const body = req.body
+  const editedTip = {
+    title: body.title,
+    url: body.url,
+    user: body.user
+  }
+  Tips.findByIdAndUpdate(req.params.id, editedTip, {new: true})
+    .then(updatedTip => {
+      res.json(updatedTip)
+    })
+    .catch(error => next(error))
+})
 module.exports = tipsRouter

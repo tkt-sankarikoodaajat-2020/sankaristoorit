@@ -26,4 +26,8 @@ const remove = (id) => {
   return req.then(console.log('tip deleted'))
 }
 
-export default { getAll, create, remove }
+const update = (id, newObject) => {
+  return axios.put(`${baseUrl}/${id}`, newObject)
+}
+
+export default { getAll, create, remove, update }

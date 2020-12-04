@@ -7,7 +7,7 @@ import { Form } from 'react-bulma-components'
 
 const { Label, Checkbox } = Form
 
-const TipList = ({ tips, deleteTip, user }) => {
+const TipList = ({ tips, deleteTip, user, updateTip }) => {
   const [filterString, setFilterString] = useState('')
   const [showOwn, setShowOwn] = useState(false)
 
@@ -55,7 +55,11 @@ const TipList = ({ tips, deleteTip, user }) => {
       </Level>
       <ul>
         {tips.filter(item => userFilter(item)).filter(item => tipsFilter(item)).map((tip) =>
-          <Tip tip={tip} key={tip.id} deleteTip={deleteTip} user={user} />
+          <Tip tip={tip}
+            key={tip.id}
+            deleteTip={deleteTip}
+            user={user}
+            updateTip={updateTip} />
         )}
       </ul>
 
