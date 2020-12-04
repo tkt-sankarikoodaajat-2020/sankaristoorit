@@ -9,17 +9,17 @@ const EditForm = (props) =>
       <Field>
         <Label>New Title:</Label>
         <Control>
-          <Input value={props.title}
+          <Input className='titleInput' value={props.title}
             onChange={(event) => props.handleTitleEdit(event)} />
         </Control>
         <Label>New Url:</Label>
         <Control>
-          <Input value={props.url}
+          <Input className='urlInput' value={props.url}
             onChange={(event) => props.handleUrlEdit(event)} />
         </Control>
       </Field>
       <Control>
-        <Button type="submit" color="primary">Update</Button>
+        <Button type="submit" className='updateButton' color="primary">Update</Button>
       </Control>
     </form>
   </Section>
