@@ -221,6 +221,23 @@ describe('tips with user test', () => {
   })
 })
 
+describe('EDIT TIP TEST', () => {
+  test('tip can be edited', async() => {
+    const editedTip = {
+      title: 'uusi'
+    }
+    const res = await api.get('/tips')
+    const id = res.body[1].id
+    await api.put('/tips/' + id)
+      .send(editedTip)
+      .expect(200)
+
+    const response = await api.get('/tips')
+    const titles = response.body.map(t => t.title)
+    expect(titles).toContain('uusi')
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
