@@ -10,16 +10,16 @@ const TipForm = (props) =>
     </Heading>
     <form onSubmit={props.addTip}>
       <Field>
-        <Label>Title:</Label>
-        <Control>
-          <Input id="title" value={props.newTitle}
-            onChange={(event) => props.handleTitleChange(event)}
-            disabled={props.disabled} />
-        </Control>
         <Label>Url:</Label>
         <Control>
           <Input id="url" value={props.newUrl}
             onChange={(event) => props.handleUrlChange(event)} placeholder={'e.g. https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'}
+            disabled={props.disabled} />
+        </Control>
+        <Label>Title:</Label>
+        <Control>
+          <Input id="title" value={props.newTitle}
+            onChange={(event) => props.handleTitleChange(event)}
             disabled={props.disabled} />
         </Control>
       </Field>

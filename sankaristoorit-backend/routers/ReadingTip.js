@@ -3,6 +3,7 @@ const Tips = require('../models/Tip')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { validURL } = require('../utils/middleware')
+const fetch = require('node-fetch')
 
 /**
  * @api {get} /tips Request List of Tips
@@ -21,6 +22,33 @@ tipsRouter.get('/', (req, res) => {
   Tips.find({}).then(tips => {
     res.json(tips)
   })
+})
+
+/**
+ * @api {get} /tips/get_title/:url Search for a title based on ENCODED url
+ * @apiName Tips
+ * @apiGroup Tips
+ * @apiSuccessExample {json} Success-Response:
+ *  HTTP/1.1 200 OK
+ *    [
+ *      {
+ *        title: 'Title string'
+ *      }
+ *    ]
+ */
+tipsRouter.get('/get_title/:url', async (req, res) => {
+  try {
+    const url = req.params.url
+    if (!url) {
+      return res.status(400).end('Missing url parameter')
+    }
+    const page = await fetch(url)
+    const text = await page.text()
+    const title = text.match(/<title>([^<]*)<\/title>/)
+    res.json({title: title[1]})
+  } catch (e) {
+    res.status(404).end('Title not found')
+  }
 })
 
 /**

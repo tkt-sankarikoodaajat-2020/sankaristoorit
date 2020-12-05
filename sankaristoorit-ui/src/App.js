@@ -52,8 +52,12 @@ const App = () => {
     setNewTitle(event.target.value)
   }
 
-  const handleUrlChange = (event) => {
+  const handleUrlChange = async (event) => {
     setNewUrl(event.target.value)
+    if ((!newTitle || newTitle.length < 1) && event.target.value) {
+      const searchTitle = await tipService.get_title(event.target.value)
+      setNewTitle(searchTitle)
+    }
   }
 
   const handleLogin = async (event) => {
