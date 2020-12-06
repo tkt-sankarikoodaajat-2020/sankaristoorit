@@ -16,7 +16,7 @@ mongoose.set('useFindAndModify', false)
 mongoose.connect(conf.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
-    if (process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV === 'test' && process.env.JEST_WORKER_ID === undefined) {
       console.log('Initializing test database')
       const testInitializer = require('./utils/testInitializer')
       testInitializer.run()
