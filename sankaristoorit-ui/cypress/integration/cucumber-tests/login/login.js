@@ -18,6 +18,7 @@ When('I enter information a correct username and password',() => {
   cy.get('#password-confirm').type('passWord')
   cy.intercept('/users/newuserlogin').as('register')
   cy.get('#signup-button').click()
+  cy.wait('@register')
 })
 
 Given('I am on the front page', () => {
@@ -34,9 +35,11 @@ When('I enter correct information', () => {
 })
 
 When('I enter a wrong password', () => {
+  cy.intercept('POST','/login').as('login')
   cy.get('#username').type('root')
   cy.get('#password').type('wrongpassword')
   cy.get('#login-button').click()
+  cy.wait('@login')
 })
 
 Then('I am logged in', () => {
