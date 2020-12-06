@@ -23,7 +23,6 @@ describe('Tips app ', function () {
     cy.get('#password').type('passWord')
     cy.get('#login-button').click()
     cy.wait('@login')
-    cy.wait(200)
     cy.get('#home-button').click()
   }
 
