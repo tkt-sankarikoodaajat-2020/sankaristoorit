@@ -11,15 +11,16 @@ Given('I am logged in', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.wait(1000)
   cy.get('#home-button').click()
 })
 
 When('I create a tip with a link', () => {
+  cy.intercept('POST', '/tips').as('newtip')
   cy.contains('Create').click()
   cy.get('#title').type('link_test')
   cy.get('#url').type('https://www.blank.org/')
   cy.get('#create-button').click()
+  cy.wait('@newtip')
 })
 
 Then('The title of the tip functions as a link', () => {
