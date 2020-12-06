@@ -4,6 +4,7 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { validURL } = require('../utils/middleware')
 const fetch = require('node-fetch')
+const cheerio = require('cheerio')
 
 const regexp = new RegExp('^(https?:\\/\\/)?'+ // protocol
 '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{1,}|'+ // domain name
@@ -54,8 +55,9 @@ tipsRouter.get('/get_title/:url', async (req, res) => {
     }
     const page = await fetch(url)
     const text = await page.text()
-    const title = text.match(/<title>([^<]*)<\/title>/)
-    res.json({ title: title[1] })
+    const $ = cheerio.load(text)
+    const title = $('title').text()
+    res.json({ title: title })
   } catch (e) {
     res.status(404).end('Title not found')
   }
