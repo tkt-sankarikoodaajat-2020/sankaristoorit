@@ -45,12 +45,14 @@ describe('Tips app ', function () {
     cy.contains('url is incorrect')
   })
 
-  it('Creating a tip fails without title with correct url', function () {
+  it('Creating a tip gets title with correct url', function () {
     loginHelper()
     cy.contains('Create')
-    cy.get('#url').type('https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit')
+    cy.get('#url').type('https://google.com')
+    cy.wait(200)
+    cy.get('#title').should('have.value', 'Google')
     cy.get('#create-button').click()
-    cy.contains('title missing')
+    cy.contains('Google')
   })
 
   it('Deleting a tip works correctly', function () {

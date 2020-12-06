@@ -3,3 +3,4 @@ coverage/
 .env
 doc/
 build/
+test-coverage/

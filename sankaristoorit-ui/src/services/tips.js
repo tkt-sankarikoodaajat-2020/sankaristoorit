@@ -26,4 +26,13 @@ const remove = (id) => {
   return req.then(console.log('tip deleted'))
 }
 
-export default { getAll, create, remove }
+const get_title = async (url) => {
+  try {
+    const res = await axios.get(baseUrl + '/get_title/' + encodeURIComponent(url))
+    return res.data.title
+  } catch (e) {
+    return
+  }
+}
+
+export default { getAll, create, remove, get_title }
