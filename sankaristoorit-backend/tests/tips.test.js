@@ -238,6 +238,20 @@ describe('EDIT TIP TEST', () => {
   })
 })
 
+describe('getting title automatically works', () => {
+  test('a valid title is returned', async () => {
+    const res = await api
+      .get('/tips/get_title/' + encodeURIComponent('https://www.google.com'))
+    expect(res.body.title).toBe('Google')
+  })
+
+  test('404 is returned when no title found', async () => {
+    await api
+      .get('/tips/get_title/' + encodeURIComponent('asd.fixu'))
+      .expect(404)
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

@@ -1,7 +1,10 @@
 {
     "testRegex": "/*.test.js$",
+    "coveragePathIgnorePatterns": [
+        "!<rootDir>/src/services/"
+    ],
     "collectCoverage": true,
-    "coverageReporters": ["lcov"],
+    "coverageReporters": ["text"],
     "coverageDirectory": "test-coverage",
     "coverageThreshold": {
      "global": {

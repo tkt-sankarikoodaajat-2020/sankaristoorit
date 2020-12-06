@@ -14,7 +14,7 @@ const TipSearch = ({ handler }) => {
     (filterString) => {
       handler(filterString)
     },
-    500
+    200
   )
 
   const handleFilterChange = (event) => {
