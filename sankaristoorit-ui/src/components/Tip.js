@@ -20,7 +20,7 @@ const RenderDelete = ({ tip, deleteTip, user }) => {
 
 const LinkOrHeader = ({ tip, deleteTip, user }) => {
   if (tip.url !== null && tip.url !== '') {
-    return <h2 className='message-header'><a href={tip.url}>{tip.title}</a><RenderDelete tip={tip} user={user} deleteTip={deleteTip} /></h2>
+    return <h2 className='message-header'><a href={tip.url} rel='noreferrer' target='_blank'>{tip.title}</a><RenderDelete tip={tip} user={user} deleteTip={deleteTip} /></h2>
   }
   return <h2 className='message-header'>{tip.title}<RenderDelete tip={tip} user={user} deleteTip={deleteTip} /></h2>
 }

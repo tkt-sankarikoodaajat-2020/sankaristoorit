@@ -11,7 +11,8 @@ Given('I am logged in', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.contains('Home').click()
+  cy.wait(1000)
+  cy.get('#home-button').click()
 })
 
 When('I create a tip with a link', () => {
