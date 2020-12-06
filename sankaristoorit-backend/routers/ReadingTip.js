@@ -157,7 +157,7 @@ tipsRouter.put('/:id', (req, res, next) => {
     url: body.url,
     user: body.user
   }
-  Tips.findByIdAndUpdate(req.params.id, editedTip, {new: true})
+  Tips.findByIdAndUpdate(req.params.id, editedTip, { new: true })
     .then(updatedTip => {
       res.json(updatedTip)
     })

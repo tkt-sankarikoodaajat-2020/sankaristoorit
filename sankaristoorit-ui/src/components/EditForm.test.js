@@ -5,7 +5,7 @@ import EditForm from './EditForm'
 
 test('renders content', () => {
   const component = render(
-      <EditForm />
+    <EditForm />
   )
   expect(component.container).toHaveTextContent('New Title:')
   expect(component.container).toHaveTextContent('New Url:')
@@ -19,7 +19,7 @@ test('EditForm posts correct data', () => {
   const titleHandlerMock = jest.fn()
   const urlHandlerMock = jest.fn()
   const component = render(
-    <EditForm 
+    <EditForm
       updateTip={updateMock}
       title={title}
       url={url}
@@ -30,13 +30,13 @@ test('EditForm posts correct data', () => {
   const input = component.container.getElementsByClassName('titleInput')[0]
   const urlInput = component.container.getElementsByClassName('urlInput')[0]
   const submit = component.container.getElementsByClassName('updateButton')[0]
-  
+
   fireEvent.change(input, {
-      target: { title: 'EditedTitle' }
+    target: { title: 'EditedTitle' }
   })
 
   fireEvent.change(urlInput, {
-      target: { url: 'https://alwaysjudgeabookbyitscover.com/'}
+    target: { url: 'https://alwaysjudgeabookbyitscover.com/' }
   })
 
   fireEvent.submit(submit)
