@@ -89,7 +89,7 @@ When('I edit a tip to not have a title', () => {
 
 When('I edit in a bad url', () => {
   cy.get('input[data-cy="editUrlInput"]').type('htps:/notarealurl.org')
-  cy.get('button[data-cy="updateButton"]').click()  
+  cy.get('button[data-cy="updateButton"]').click()
 })
 
 Then('a tip is created', () => {
