@@ -26,6 +26,10 @@ const remove = (id) => {
   return req.then(console.log('tip deleted'))
 }
 
+const update = (id, newObject) => {
+  return axios.put(`${baseUrl}/${id}`, newObject)
+}
+
 const get_title = async (url) => {
   try {
     const res = await axios.get(baseUrl + '/get_title/' + encodeURIComponent(url))
@@ -35,4 +39,4 @@ const get_title = async (url) => {
   }
 }
 
-export default { getAll, create, remove, get_title }
+export default { getAll, create, remove, get_title, update }

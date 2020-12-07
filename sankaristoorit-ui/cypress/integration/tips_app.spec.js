@@ -55,11 +55,25 @@ describe('Tips app ', function () {
     cy.contains('Google')
   })
 
-  it('Deleting a tip works correctly', function () {
+  it('Editing a tip works correctly', function () {
     loginHelper()
     cy.contains('h2', 'Cy_testi_2').within(() => {
+      cy.contains('Edit tip').click()
+    })
+    cy.get('input[data-cy="editTitleInput"]').clear()
+    cy.get('input[data-cy="editTitleInput"]').type('Edit_test')
+    cy.get('input[data-cy="editUrlInput"]').clear()
+    cy.get('input[data-cy="editUrlInput"]').type('https://en.wikipedia.org/wiki/Lorem_ipsum')
+    cy.get('button[data-cy="updateButton"]').click()
+    cy.contains('Edit_test')
+    cy.contains('https://en.wikipedia.org/wiki/Lorem_ipsum')
+  })
+
+  it('Deleting a tip works correctly', function () {
+    loginHelper()
+    cy.contains('h2', 'Edit_test').within(() => {
       cy.contains('Delete').click()
     })
-    cy.contains('Cy_testi_2').should('not.exist')
+    cy.contains('Edit_testi').should('not.exist')
   })
 })
