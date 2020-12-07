@@ -155,8 +155,7 @@ const App = () => {
   return (
     <Router>
       <Navbar role="navigation" fixed="top" color="dark">
-        {user === null && LoggedOut()}
-        {user !== null && LoggedIn()}
+        {user ? LoggedIn() : LoggedOut()}
       </Navbar>
       <Container>
         <Hero color="primary">
@@ -173,13 +172,13 @@ const App = () => {
         </Hero>
         <Switch>
           <Route path="/register">
-            {user === null &&
+            {!user &&
               <RegisterForm login={handleLogin}
                 setLoginUsername={setUsername}
                 setLoginPassword={setPassword} />}
           </Route>
           <Route path="/login">
-            {user === null ?
+            {!user ?
               <LoginForm login={handleLogin}
                 username={username}
                 password={password}
@@ -197,11 +196,8 @@ const App = () => {
             <TipForm addTip={addTip} newTitle={newTitle}
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
-              disabled={user === null} />
-            <TipList tips={tips}
-              deleteTip={deleteTip}
-              user={user}
-              updateTip={updateTip} />
+              disabled={!user} />
+            <TipList tips={tips} deleteTip={deleteTip} user={user} />
           </Route>
         </Switch>
       </Container >
