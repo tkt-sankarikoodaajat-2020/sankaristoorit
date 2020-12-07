@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Section, Heading } from 'react-bulma-components'
+import { Form, Button, Section, Heading, Progress } from 'react-bulma-components'
 
 const { Input, Field, Control, Label } = Form
 
@@ -24,7 +24,7 @@ const TipForm = (props) =>
         </Control>
       </Field>
       {!props.disabled && props.fetchingUrl &&
-        <progress className='progress is-small'></progress>
+        <Progress className='is-small'></Progress>
       }
       <Control>
         <Button id="create-button" type="submit" color="primary" disabled={props.disabled}>Create</Button>
