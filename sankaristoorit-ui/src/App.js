@@ -53,10 +53,13 @@ const App = () => {
   }
 
   const handleUrlChange = async (event) => {
-    setNewUrl(event.target.value)
-    if ((!newTitle || newTitle.length < 1) && event.target.value) {
-      const searchTitle = await tipService.get_title(event.target.value)
-      setNewTitle(searchTitle)
+    const url = event.target.value
+    setNewUrl(url)
+    if ((!newTitle || newTitle.length < 1) && url) {
+      const searchTitle = await tipService.get_title(url)
+      if (url === event.target.value) {
+        setNewTitle(searchTitle)
+      }
     }
   }
 
