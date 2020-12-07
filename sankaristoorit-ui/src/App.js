@@ -196,6 +196,7 @@ const App = () => {
             <TipForm addTip={addTip} newTitle={newTitle}
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
+              updateTip={updateTip}
               disabled={!user} />
             <TipList tips={tips} deleteTip={deleteTip} user={user} />
           </Route>
