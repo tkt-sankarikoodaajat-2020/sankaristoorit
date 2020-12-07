@@ -25,7 +25,7 @@ const TipSearch = ({ handler }) => {
   return (
     <Field className='is-horizontal'>
       <Control iconLeft iconRight>
-        <Input type="text" placeholder="Filter tips" onChange={handleFilterChange} value={filterString}/>
+        <Input id="filterInput" type="text" placeholder="Filter tips" onChange={handleFilterChange} value={filterString}/>
         <Icon align="left"><FontAwesomeIcon icon={ faSearch } /></Icon>
       </Control>
     </Field>

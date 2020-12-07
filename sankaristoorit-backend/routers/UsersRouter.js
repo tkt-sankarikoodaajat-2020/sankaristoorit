@@ -20,7 +20,17 @@ usersRouter.get('/', async (request, response) => {
   const users = await User.find({}).populate('tips', '-user')
   response.json(users.map((u) => u.toJSON()))
 })
-
+/**
+ * @api {get} /users/:name Check username availability
+ * @apiName Tips
+ * @apiGroup Users
+ * @apiParam {String} name Username to check
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "usernameAvailable": true,
+ *     }
+ */
 usersRouter.get('/:name', async (request, response) => {
   const user = await User.findOne({ username: request.params.name })
   if (user) {

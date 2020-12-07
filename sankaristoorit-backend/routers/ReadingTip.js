@@ -149,5 +149,49 @@ tipsRouter.delete('/:id', (req, res, next) => {
     })
     .catch(error => next(error))
 })
+/**
+ * @api {put} /tips/:id Update Tip with new information
+ * @apiName Tips
+ * @apiGroup Tips
+ * @apiParam {String} title
+ * @apiParam {String} url
+ * @apiSuccessExample {json} Success-Response:
+ *    HTTP/1.1 200 OK
+ *      [
+ *        {
+ *          title: 'Edited title',
+ *          url: '',
+ *          user: '5fc97fadc244b11b5b5ae0m8',
+ *          id: '5fcaa9cbc1b2873fdcfc9n2k'
+ *        }
+ *      ]
+ */
+tipsRouter.put('/:id', (req, res, next) => {
+  const body = req.body
 
+  if(!body.title) {
+    return res.status(400).json({
+      error: 'title missing'
+    })
+  }
+
+  if(body.url !== null && body.url !== '') {
+    if(!validURL(body.url)) {
+      return res.status(400).json({
+        error: 'url is incorrect'
+      })
+    }
+  }
+
+  const editedTip = {
+    title: body.title,
+    url: body.url,
+    user: body.user
+  }
+  Tips.findByIdAndUpdate(req.params.id, editedTip, { new: true })
+    .then(updatedTip => {
+      res.json(updatedTip)
+    })
+    .catch(error => next(error))
+})
 module.exports = tipsRouter

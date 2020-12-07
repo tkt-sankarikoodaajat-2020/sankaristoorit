@@ -11,7 +11,6 @@ Given('I am logged in', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.wait(1000)
   cy.get('#home-button').click()
 })
 
@@ -22,7 +21,6 @@ Given('I am logged in using another account', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.wait(1000)
   cy.get('#home-button').click()
 })
 
@@ -67,6 +65,33 @@ When('I doubleclick checkbox to show all the tips and see that the button works'
   cy.get('#checkbox').click()
 })
 
+When('I press edit on a tip', () => {
+  cy.contains('Create').click()
+  cy.get('#title').type('edit_testi')
+  cy.get('#create-button').click()
+  cy.contains('h2', 'edit_testi').within(() => {
+    cy.contains('Edit tip').click()
+  })
+})
+
+When('I enter new information about the tip', () => {
+  cy.get('input[data-cy="editTitleInput"]').clear()
+  cy.get('input[data-cy="editTitleInput"]').type('thisHasChanged')
+  cy.get('input[data-cy="editUrlInput"]').type('https://theuselessweb.com/')
+  cy.get('button[data-cy="updateButton"]').click()
+})
+
+When('I edit a tip to not have a title', () => {
+  cy.get('input[data-cy="editTitleInput"]').clear()
+  cy.get('button[data-cy="updateButton"]').click()
+
+})
+
+When('I edit in a bad url', () => {
+  cy.get('input[data-cy="editUrlInput"]').type('htps:/notarealurl.org')
+  cy.get('button[data-cy="updateButton"]').click()
+})
+
 Then('a tip is created', () => {
   cy.contains('Cy_testi')
   cy.contains('https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus')
@@ -96,5 +121,22 @@ Then('a tip is deleted', () => {
 Then('Delete should not be visible', () => {
   cy.contains('h2', 'Cy_test').within(() => {
     cy.contains('Delete').should('not.exist')
+  })
+})
+
+Then('the tip is updated', () => {
+  cy.contains('thisHasChanged')
+  cy.contains('https://theuselessweb.com/')
+})
+
+Then('Edit tip should not be visible', () => {
+  cy.contains('h2', 'Cy_test').within(() => {
+    cy.contains('Edit tip').should('not.exist')
+  })
+})
+
+Then('The tip is not edited', () => {
+  cy.contains('h2', 'edit_testi').within(() => {
+    cy.contains('Delete').click()
   })
 })

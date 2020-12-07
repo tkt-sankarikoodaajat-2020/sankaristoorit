@@ -13,10 +13,12 @@ When('I click register', () => {
 })
 
 When('I enter information a correct username and password',() => {
+  cy.intercept('GET', '/users/newuserlogin').as('usernamecheck')
   cy.get('#username').type('newuserlogin')
   cy.get('#password').type('passWord')
   cy.get('#password-confirm').type('passWord')
-  cy.intercept('/users/newuserlogin').as('register')
+  cy.wait('@usernamecheck')
+  cy.intercept('POST', '/users').as('register')
   cy.get('#signup-button').click()
   cy.wait('@register')
 })

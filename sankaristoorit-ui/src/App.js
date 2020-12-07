@@ -105,6 +105,18 @@ const App = () => {
       .catch(error => addError('add', error))
   }
 
+  const updateTip = (id, editedTitle, editedUrl) => {
+    const tipObject = tips.find(t => t.id === id)
+    const updatedTip = { ...tipObject, title: editedTitle, url: editedUrl }
+
+    tipService
+      .update(id, updatedTip)
+      .then(res => {
+        setTips(tips.map(tip => tip.id !== id ? tip : res.data))
+      })
+      .catch(error => addError('update', error))
+  }
+
   const deleteTip = (id) => {
     tipService
       .remove(id)
@@ -186,7 +198,10 @@ const App = () => {
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
               disabled={user === null} />
-            <TipList tips={tips} deleteTip={deleteTip} user={user} />
+            <TipList tips={tips}
+              deleteTip={deleteTip}
+              user={user}
+              updateTip={updateTip} />
           </Route>
         </Switch>
       </Container >
