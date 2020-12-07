@@ -54,6 +54,10 @@ tipsRouter.get('/get_title/:url', async (req, res) => {
       throw 'not found'
     }
     const page = await fetch(url)
+    const contentType = page.headers.get('content-type')
+    if (contentType.indexOf('text/html') < 0 && contentType.indexOf('application/xml+xhtml') < 0) {
+      throw 'wrong content-type header'
+    }
     const text = await page.text()
     const $ = cheerio.load(text)
     const title = $('title').text()
