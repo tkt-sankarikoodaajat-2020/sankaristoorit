@@ -11,7 +11,6 @@ Given('I am logged in', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.wait(1000)
   cy.get('#home-button').click()
 })
 
@@ -22,7 +21,6 @@ Given('I am logged in using another account', () => {
   cy.get('#password').type('passWord')
   cy.get('#login-button').click()
   cy.wait('@login')
-  cy.wait(1000)
   cy.get('#home-button').click()
 })
 
@@ -83,6 +81,17 @@ When('I enter new information about the tip', () => {
   cy.get('button[data-cy="updateButton"]').click()
 })
 
+When('I edit a tip to not have a title', () => {
+  cy.get('input[data-cy="editTitleInput"]').clear()
+  cy.get('button[data-cy="updateButton"]').click()
+
+})
+
+When('I edit in a bad url', () => {
+  cy.get('input[data-cy="editUrlInput"]').type('htps:/notarealurl.org')
+  cy.get('button[data-cy="updateButton"]').click()  
+})
+
 Then('a tip is created', () => {
   cy.contains('Cy_testi')
   cy.contains('https://fullstackopen.com/osa1/monimutkaisempi_tila_reactin_debuggaus')
@@ -123,5 +132,11 @@ Then('the tip is updated', () => {
 Then('Edit tip should not be visible', () => {
   cy.contains('h2', 'Cy_test').within(() => {
     cy.contains('Edit tip').should('not.exist')
+  })
+})
+
+Then('The tip is not edited', () => {
+  cy.contains('h2', 'edit_testi').within(() => {
+    cy.contains('Delete').click()
   })
 })

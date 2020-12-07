@@ -71,3 +71,19 @@ Scenario: Edit not showing for other users
 
 When I am logged in using another account
 Then Edit tip should not be visible
+
+Scenario: Edited title can't be empty
+
+Given I am on the front page
+And I am logged in
+When I press edit on a tip
+And I edit a tip to not have a title
+Then The tip is not edited
+
+Scenario: Editing a title to have a bad url-format
+
+Given I am on the front page
+And I am logged in
+When I press edit on a tip
+And I edit in a bad url
+Then The tip is not edited
