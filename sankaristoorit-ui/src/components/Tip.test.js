@@ -48,3 +48,29 @@ test('does not render delete-button if not owner', async () => {
   )
   expect(component.container).not.toHaveTextContent('Delete')
 })
+
+test('clicking the edit-button does not call updateTip()', async () => {
+  const mockHandler = jest.fn()
+
+  const component = render(
+    <Tip tip={tip} updateTip={mockHandler} user={user} />
+  )
+
+  const button = component.getByText('Edit tip')
+  fireEvent.click(button)
+
+  expect(mockHandler.mock.calls).toHaveLength(0)
+})
+
+test('does not render edit-button if not owner', async () => {
+  const wrongUser = {
+    username: 'Hupiukko',
+    id: 26
+  }
+  const mockHandler = jest.fn()
+
+  const component = render(
+    <Tip tip={tip} upddateTip={mockHandler} user={wrongUser} />
+  )
+  expect(component.container).not.toHaveTextContent('Edit Tip')
+})
