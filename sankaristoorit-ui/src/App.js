@@ -24,6 +24,9 @@ const App = () => {
   const [newUrl, setNewUrl] = useState('')
   const [errorMsgs, setErrorMsgs] = useState([])
 
+  const [fetchingUrl, setFetchingUrl] = useState(false)
+  const [autotitled, setAutotitled] = useState(false)
+
   useEffect(() => {
     tipService
       .getAll()
@@ -49,14 +52,21 @@ const App = () => {
   }
 
   const handleTitleChange = (event) => {
+    setAutotitled(false)
     setNewTitle(event.target.value)
   }
 
   const handleUrlChange = async (event) => {
-    setNewUrl(event.target.value)
-    if ((!newTitle || newTitle.length < 1) && event.target.value) {
-      const searchTitle = await tipService.get_title(event.target.value)
-      setNewTitle(searchTitle)
+    const url = event.target.value
+    setNewUrl(url)
+    if ((!newTitle || newTitle.length < 1 || autotitled) && url) {
+      setFetchingUrl(true)
+      const searchTitle = await tipService.get_title(url)
+      setFetchingUrl(false)
+      if (url === event.target.value) {
+        setAutotitled(true)
+        setNewTitle(searchTitle)
+      }
     }
   }
 
@@ -196,6 +206,7 @@ const App = () => {
             <TipForm addTip={addTip} newTitle={newTitle}
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
+              fetchingUrl={fetchingUrl}
               disabled={!user} />
             <TipList tips={tips} deleteTip={deleteTip} updateTip={updateTip} user={user} />
           </Route>

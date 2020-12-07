@@ -283,6 +283,12 @@ describe('getting title automatically works', () => {
       .get('/tips/get_title/' + encodeURIComponent('asd.fixu'))
       .expect(404)
   })
+
+  test('404 is returned when content type is wrong', async () => {
+    await api
+      .get('/tips/get_title/' + encodeURIComponent('https://www.google.com/favicon.ico'))
+      .expect(404)
+  })
 })
 
 afterAll(() => {

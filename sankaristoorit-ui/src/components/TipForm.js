@@ -23,6 +23,9 @@ const TipForm = (props) =>
             disabled={props.disabled} />
         </Control>
       </Field>
+      {!props.disabled && props.fetchingUrl &&
+        <progress className='progress is-small'></progress>
+      }
       <Control>
         <Button id="create-button" type="submit" color="primary" disabled={props.disabled}>Create</Button>
       </Control>
