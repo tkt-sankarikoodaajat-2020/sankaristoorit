@@ -221,10 +221,11 @@ describe('tips with user test', () => {
   })
 })
 
-describe('EDIT TIP TEST', () => {
+describe('EDIT TIP TESTS', () => {
   test('tip can be edited', async() => {
     const editedTip = {
-      title: 'uusi'
+      title: 'uusi',
+      url: 'https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit'
     }
     const res = await api.get('/tips')
     const id = res.body[1].id
@@ -235,6 +236,38 @@ describe('EDIT TIP TEST', () => {
     const response = await api.get('/tips')
     const titles = response.body.map(t => t.title)
     expect(titles).toContain('uusi')
+  })
+  test('edited title cannot be empty', async() => {
+    const editWithoutTitle = {
+      title: ''
+    }
+    const res = await api.get('/tips')
+    const id = res.body[1].id
+    await api.put('/tips/' + id)
+      .send(editWithoutTitle)
+      .expect(400)
+  })
+  test('Put fails with incorrect url-format', async() => {
+    const badUrl = {
+      title: 'cool and good',
+      url: 'htps:/notavalidurl.com'
+    }
+    const res = await api.get('/tips')
+    const id = res.body[1].id
+    await api.put('/tips/' + id)
+      .send(badUrl)
+      .expect(400)
+  })
+  test('Edited url can be empty', async() => {
+    const noUrl = {
+      title: 'fancy',
+      url: ''
+    }
+    const res = await api.get('/tips')
+    const id = res.body[1].id
+    await api.put('/tips/' + id)
+      .send(noUrl)
+      .expect(200)
   })
 })
 
