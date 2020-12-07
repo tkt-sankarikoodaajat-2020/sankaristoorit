@@ -196,9 +196,8 @@ const App = () => {
             <TipForm addTip={addTip} newTitle={newTitle}
               handleTitleChange={handleTitleChange} newUrl={newUrl}
               handleUrlChange={handleUrlChange}
-              updateTip={updateTip}
               disabled={!user} />
-            <TipList tips={tips} deleteTip={deleteTip} user={user} />
+            <TipList tips={tips} deleteTip={deleteTip} updateTip={updateTip} user={user} />
           </Route>
         </Switch>
       </Container >
