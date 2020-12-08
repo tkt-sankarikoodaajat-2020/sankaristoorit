@@ -19,6 +19,8 @@
 
 [Mongo-Models](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/blob/master/sankaristoorit-backend/mongomodels-uml.png)
 
+[Report](https://github.com/tkt-sankarikoodaajat-2020/sankaristoorit/blob/master/REPORT.md)
+
 ### Definition of done
 
 - Analysoitu
