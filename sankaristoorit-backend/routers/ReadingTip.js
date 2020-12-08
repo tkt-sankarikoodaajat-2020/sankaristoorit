@@ -60,7 +60,7 @@ tipsRouter.get('/get_title/:url', async (req, res) => {
     }
     const text = await page.text()
     const $ = cheerio.load(text)
-    const title = $('title').text()
+    const title = $('head title').first().text()
     res.json({ title: title })
   } catch (e) {
     res.status(404).end('Title not found')
