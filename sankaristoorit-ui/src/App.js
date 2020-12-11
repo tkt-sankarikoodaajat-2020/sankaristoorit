@@ -10,6 +10,7 @@ import TipForm from './components/TipForm'
 import LoginForm from './components/LoginForm'
 import ErrorBox from './components/ErrorBox'
 import RegisterForm from './components/RegisterForm'
+import BulmaFooter from './components/BulmaFooter'
 
 import { Hero, Heading, Section, Container, Button, Navbar } from 'react-bulma-components'
 
@@ -212,6 +213,7 @@ const App = () => {
           </Route>
         </Switch>
       </Container >
+      <BulmaFooter></BulmaFooter>
     </Router >
   )
 }
